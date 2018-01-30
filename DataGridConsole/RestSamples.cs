@@ -12,10 +12,11 @@ namespace DataGridConsole
     /// </summary>
     public static class RestSamples
     {
-        public static int WorkspaceId = 1017621;
+        
         public static void GetAuditRecords(DataGridClient client)
         {
             // declare query parameters
+            const int workspaceId = -1;
             const string requestUri =
                 "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemsAsync";
             const int itemsPerPage = 100;
@@ -25,11 +26,11 @@ namespace DataGridConsole
             const bool includeDetails = false;
             const bool includeOldNewValues = false;
             const string filterQuery =
-                "{\"filtered\":{\"filter\":{},\"query\":{\"query_string\":{\"query\":\"\\\"Text Migration*\\\"\",\"fields\":[\"Details.*\"]}}}}";
+                "{\"filtered\":{\"filter\":{},\"query\":{\"query_string\":{\"query\":\"\\\"*\\\"\",\"fields\":[\"Details.*\"]}}}}";
 
             // build out JSON Object as payload
             JObject payload = new JObject();
-            payload["workspaceId"] = WorkspaceId;
+            payload["workspaceId"] = workspaceId;
             payload["request"] = new JObject
             {
                 { "itemsPerPage", itemsPerPage },
@@ -41,8 +42,16 @@ namespace DataGridConsole
                 { "filterQuery", filterQuery }
             };
 
-            JObject results = client.Post(requestUri, payload);
-            Console.WriteLine(results.ToString());
+            try
+            {
+                JObject results = client.Post(requestUri, payload);
+                Console.WriteLine(results.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            
         }
     }
 }
