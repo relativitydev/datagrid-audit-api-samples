@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
 namespace DataGridConsole
@@ -25,21 +21,36 @@ namespace DataGridConsole
             const string sortOrder = "desc";
             const bool includeDetails = false;
             const bool includeOldNewValues = false;
-            const string filterQuery =
+            string filterQuery =
+                // { 
+                //   "filtered": { 
+                //     "filter": {},
+                //     "query": {
+                //       "query_string": {
+                //         "query": "\*\",
+                //         "fields": ["Details.*"]
+                //       }
+                //     }       
+                //   }
+                // }
                 "{\"filtered\":{\"filter\":{},\"query\":{\"query_string\":{\"query\":\"\\\"*\\\"\",\"fields\":[\"Details.*\"]}}}}";
 
+
+
             // build out JSON Object as payload
-            JObject payload = new JObject();
-            payload["workspaceId"] = workspaceId;
-            payload["request"] = new JObject
+            JObject payload = new JObject
             {
-                { "itemsPerPage", itemsPerPage },
-                { "pageNumber", pageNumber },
-                { "sortBy", sortBy },
-                { "sortOrder", sortOrder },
-                { "includeDetails", includeDetails },
-                { "includeOldNewValues", includeOldNewValues },
-                { "filterQuery", filterQuery }
+                ["workspaceId"] = workspaceId,
+                ["request"] = new JObject
+                {
+                    {"itemsPerPage", itemsPerPage},
+                    {"pageNumber", pageNumber},
+                    {"sortBy", sortBy},
+                    {"sortOrder", sortOrder},
+                    {"includeDetails", includeDetails},
+                    {"includeOldNewValues", includeOldNewValues},
+                    {"filterQuery", filterQuery}
+                }
             };
 
             try
@@ -52,6 +63,31 @@ namespace DataGridConsole
                 Console.WriteLine(e);
             }
             
+        }
+
+        public static void GetSingleAuditRecord(DataGridClient client)
+        {
+            int recordId = 13486;
+            const string requestUri =
+                "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemAsync";
+            JObject payload = new JObject
+            { 
+                ["workspaceId"] = -1, // use admin workspace
+                ["request"] = new JObject
+                {
+                    {"Id", recordId}
+                }
+            };
+            
+            try
+            {
+                JObject results = client.Post(requestUri, payload);
+                Console.WriteLine(results.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

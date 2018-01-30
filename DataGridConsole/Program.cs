@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataGridConsole
 {
@@ -26,7 +22,7 @@ namespace DataGridConsole
                         Console.WriteLine("https://hostname.com");
                         Console.WriteLine("username@hostname.com");
                         Console.WriteLine("MyPassword!1234");
-                        End();
+                        PauseExec();
                         return;
                     }
                     string url = creds[0];
@@ -35,13 +31,19 @@ namespace DataGridConsole
                     // instantiate DataGridClient and perform actions
                     DataGridClient client = new DataGridClient(url, username, password);
                     Console.WriteLine("Successfully instantiated DataGridClient.");
+                    Console.WriteLine("-----------");
+                    Console.WriteLine("Querying for a single audit record...");
+                    RestSamples.GetSingleAuditRecord(client);
+                    PauseExec();
+                    Console.WriteLine("-----------");
+                    Console.WriteLine("Querying for the first 100 audit records...");
                     RestSamples.GetAuditRecords(client);
-                    End();
+                    PauseExec();
                 }
                 else
                 {
                     Console.WriteLine($"Specified file {credsFilePath} does not exist.");
-                    End();
+                    PauseExec();
                 }
                 
             }
@@ -50,7 +52,7 @@ namespace DataGridConsole
                 // TODO: implement reading from user input
                 //Console.WriteLine("Please enter your Relativity URL (e.g. https://my-instance.com");
                 Console.WriteLine("Please specify a path to a credentials file.");
-                End();
+                PauseExec();
             }          
         }
 
@@ -58,7 +60,7 @@ namespace DataGridConsole
         /// <summary>
         /// Pauses terminal at end of execution.
         /// </summary>
-        private static void End()
+        private static void PauseExec()
         {
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
