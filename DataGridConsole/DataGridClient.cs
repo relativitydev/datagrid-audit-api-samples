@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 namespace DataGridConsole
 {
     /// <summary>
-    /// This class authorizes and performs requests. Wraps HttpClient.
+    /// This class authorizes and performs requests. Wraps HttpClient to create generic HTTP methods.
     /// </summary>
     public class DataGridClient
     {
@@ -32,7 +32,7 @@ namespace DataGridConsole
         /// </summary>
         public static string Url { get; set; }
 
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
 
         #endregion
 
