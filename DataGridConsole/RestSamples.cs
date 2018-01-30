@@ -65,9 +65,8 @@ namespace DataGridConsole
             
         }
 
-        public static void GetSingleAuditRecord(DataGridClient client)
-        {
-            int recordId = 13486;
+        public static void GetSingleAuditRecord(DataGridClient client, int recordId)
+        {            
             const string requestUri =
                 "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemAsync";
             JObject payload = new JObject

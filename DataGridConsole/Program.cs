@@ -32,10 +32,7 @@ namespace DataGridConsole
                     DataGridClient client = new DataGridClient(url, username, password);
                     Console.WriteLine("Successfully instantiated DataGridClient.");
                     Console.WriteLine("-----------");
-                    Console.WriteLine("Querying for a single audit record...");
-                    RestSamples.GetSingleAuditRecord(client);
                     PauseExec();
-                    Console.WriteLine("-----------");
                     Console.WriteLine("Querying for the first 100 audit records...");
                     RestSamples.GetAuditRecords(client);
                     PauseExec();
