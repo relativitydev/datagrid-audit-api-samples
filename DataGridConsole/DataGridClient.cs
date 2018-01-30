@@ -53,9 +53,14 @@ namespace DataGridConsole
         }
 
         #region Public methods
-
+        /// <summary>
+        /// Generic GET that wraps HttpClient.GetAsync()
+        /// </summary>
+        /// <param name="url"></param>
         public void Get(string url)
         {
+            HttpResponseMessage response = _httpClient.GetAsync(url).Result;
+            string resultAsStr = response.Content.ReadAsStringAsync().Result;
             
         }
         
