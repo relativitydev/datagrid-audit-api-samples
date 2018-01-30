@@ -35,6 +35,7 @@ namespace DataGridConsole
                     // instantiate DataGridClient and perform actions
                     DataGridClient client = new DataGridClient(url, username, password);
                     Console.WriteLine("Successfully instantiated DataGridClient.");
+                    RestSamples.GetAuditRecords(client);
                     End();
                 }
                 else

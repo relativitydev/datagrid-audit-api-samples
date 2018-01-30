@@ -38,6 +38,9 @@ namespace DataGridConsole
         /// </summary>
         private string _password;
 
+        /// <summary>
+        /// Our instance of HttpClient that performs the actual requests
+        /// </summary>
         private readonly HttpClient _httpClient;
 
         #endregion
