@@ -37,11 +37,16 @@ namespace DataGridConsole
                     Console.WriteLine("Successfully instantiated DataGridClient.");
                     End();
                 }
-                Console.WriteLine($"Specified file {credsFilePath} does not exist.");
-                End();
+                else
+                {
+                    Console.WriteLine($"Specified file {credsFilePath} does not exist.");
+                    End();
+                }
+                
             }
             else
             {
+                // TODO: implement reading from user input
                 //Console.WriteLine("Please enter your Relativity URL (e.g. https://my-instance.com");
                 Console.WriteLine("Please specify a path to a credentials file.");
                 End();
