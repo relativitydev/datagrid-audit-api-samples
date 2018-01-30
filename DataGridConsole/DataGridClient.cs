@@ -17,20 +17,26 @@ namespace DataGridConsole
         #region Members
 
         /// <summary>
+        /// Base URL of the instance
+        /// e.g. http://relativity-instance.com
+        /// </summary>
+        public string Url { get; }
+
+        /// <summary>
         /// Username = email address
         /// </summary>
-        public string Username { get; set; }
+        public string Username { get; }
+
+        /// <summary>
+        /// Returns the timeout value
+        /// </summary>
+        public TimeSpan Timeout => _httpClient.Timeout;
+
 
         /// <summary>
         /// Password
         /// </summary>
         private string _password;
-
-        /// <summary>
-        /// Base URL of the instance
-        /// e.g. http://relativity-instance.com
-        /// </summary>
-        public string Url { get; set; }
 
         private readonly HttpClient _httpClient;
 
