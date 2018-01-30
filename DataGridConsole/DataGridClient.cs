@@ -19,25 +19,32 @@ namespace DataGridConsole
         /// <summary>
         /// Username = email address
         /// </summary>
-        public static string Username { get; set; }
+        public string Username { get; set; }
 
         /// <summary>
         /// Password
         /// </summary>
-        private static string _password;
+        private string _password;
 
         /// <summary>
         /// Base URL of the instance
         /// e.g. http://relativity-instance.com
         /// </summary>
-        public static string Url { get; set; }
+        public string Url { get; set; }
 
         private readonly HttpClient _httpClient;
 
         #endregion
 
 
-        public DataGridClient(string url, string username, string password)
+        /// <summary>
+        /// Creates a new instance of the DataGridClient object
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="timeoutInSeconds"></param>
+        public DataGridClient(string url, string username, string password, int timeoutInSeconds = 60)
         {
             Url = url;
             Username = username;
@@ -46,7 +53,8 @@ namespace DataGridConsole
             // set up HttpClient
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri(Url)
+                BaseAddress = new Uri(Url),
+                Timeout = new TimeSpan(0, 0, 0, timeoutInSeconds)
             };
 
             string basicAuthHeader = GenerateBasicAuthParam(Username, _password);
