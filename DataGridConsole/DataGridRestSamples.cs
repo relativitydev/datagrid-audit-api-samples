@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
 namespace DataGridConsole
@@ -24,20 +25,10 @@ namespace DataGridConsole
             const string sortOrder = "desc";
             const bool includeDetails = false;
             const bool includeOldNewValues = false;
-            string filterQuery =
-                // { 
-                //   "filtered": { 
-                //     "filter": {},
-                //     "query": {
-                //       "query_string": {
-                //         "query": "\*\",
-                //         "fields": ["Details.*"]
-                //       }
-                //     }       
-                //   }
-                // }
-                "{\"filtered\":{\"filter\":{},\"query\":{\"query_string\":{\"query\":\"\\\"*\\\"\",\"fields\":[\"Details.*\"]}}}}";
 
+            string query = "*";
+            List<string> fields = new List<string> {"Details.*"};
+            string filterQuery = BuildOutFilterQuery(query, fields);
 
 
             // build out JSON Object as payload
@@ -96,6 +87,46 @@ namespace DataGridConsole
             {
                 Console.WriteLine(e);
             }
+        }
+
+
+        /// <summary>
+        /// Builds out a JSON object converted to string based on filters
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="fields"></param>
+        /// <returns></returns>
+        private static string BuildOutFilterQuery(string query, IEnumerable<string> fields)
+        {
+            // JSON structure:
+            // { 
+            //   "filtered": { 
+            //     "filter": {},
+            //     "query": {
+            //       "query_string": {
+            //         "query": "\*\",
+            //         "fields": ["Details.*"]
+            //       }
+            //     }       
+            //   }
+            // }
+            JObject result = new JObject
+            {
+                ["filtered"] = new JObject
+                {
+                    ["filter"] = new JObject(),
+                    ["query"] = new JObject
+                    {
+                        ["query_string"] = new JObject
+                        {
+                            {"query", query},
+                            {"fields", JArray.FromObject(fields)}
+                        }
+                    }
+                }
+            };
+
+            return result.ToString();
         }
     }
 }
