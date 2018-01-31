@@ -105,7 +105,7 @@ namespace DataGridConsole
             const int workspaceId = -1;
             const string requestUri =
                 "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemsAsync";
-            const int itemsPerPage = 50;
+            const int itemsPerPage = 1000;
             const int pageNumber = 1;
             const string sortBy = "TimeStamp";
             const string sortOrder = "desc";
@@ -154,7 +154,11 @@ namespace DataGridConsole
                 {
                     JObject obj = (JObject) result;
                     string userName = (string) obj["UserName"];
+                    // print out basic info
+                    Console.WriteLine($"User: {userName}");
+                    Console.WriteLine($"Timestamp: {obj["TimeStamp"]}");
                     users.Add(userName);
+                    Console.WriteLine("--");
                 }
 
                 // print out users
