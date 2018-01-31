@@ -18,9 +18,26 @@ namespace DataGridConsole.Filters
 
         #region Constructors
 
+        public ActionFilter(int actionId)
+        {
+            _actionIds = new List<int>
+            {
+                actionId
+            };
+        }
+
         public ActionFilter(IEnumerable<int> actionIds)
-        {;
+        {
             _actionIds = actionIds.ToList();
+        }
+
+
+        public ActionFilter(string actionName)
+        {
+            _actionNames = new List<string>
+            {
+                actionName
+            };
         }
 
         public ActionFilter(IEnumerable<string> actionNames)
@@ -30,9 +47,12 @@ namespace DataGridConsole.Filters
 
         #endregion
 
+
         public JObject GetFilter()
         {
-            throw new NotImplementedException();
+            var result = new JObject();
+
+            return result;
         }
 
 

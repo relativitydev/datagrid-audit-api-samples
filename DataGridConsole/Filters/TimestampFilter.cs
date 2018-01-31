@@ -28,28 +28,19 @@ namespace DataGridConsole.Filters
         /// <returns></returns>
         public JObject GetFilter()
         {
-            // Model for JSON query (the "and" and "or" arrays can
-            // be safely ommitted):
+            // Model for JSON query
 
-            // ["and"] = new JArray
+            // new JObject
             // {
-            //     new JObject
-            //     {
-            //         ["or"] = new JArray
-            //         {
-            //             new JObject
-            //             {
-            //                 ["range"] = new JObject
-            //                 {
-            //                     ["TimeStamp"] = new JObject
-            //                     {
-            //                         { "gte", "2018-01-14T00:00:00.000Z" }
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     } 
+            //      ["range"] = new JObject
+            //      {
+            //            ["TimeStamp"] = new JObject
+            //            {
+            //                 { "gte", "2018-01-14T00:00:00.000Z" }
+            //            }
+            //      }
             // }
+
             const string dateFormat = "yyyy-MM-ddTHH:mm:ss.fffZ";
             JObject result = new JObject
             {

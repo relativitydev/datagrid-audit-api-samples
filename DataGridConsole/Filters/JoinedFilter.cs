@@ -17,7 +17,7 @@ namespace DataGridConsole.Filters
         /// <summary>
         /// List of filters we want to combine
         /// </summary>
-        private List<IDataGridFilter> _filters = new List<IDataGridFilter>();
+        private readonly List<IDataGridFilter> _filters = new List<IDataGridFilter>();
 
         /// <summary>
         /// Boolean operation with which we want to combine the filters
@@ -73,7 +73,7 @@ namespace DataGridConsole.Filters
                     result[Constants.BoolOps.And] = filtersJArray;
                     break;
                 case BoolOp.Or:
-                    result[BoolOp.Or] = filtersJArray;
+                    result[Constants.BoolOps.Or] = filtersJArray;
                     break;
                 // should never hit default case
             }
