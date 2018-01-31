@@ -26,9 +26,9 @@ namespace DataGridConsole
             const bool includeDetails = false;
             const bool includeOldNewValues = false;
 
-            string query = " 'ID' == 13557 ";
-            List<string> fields = new List<string> {"ID", "Timestamp"};
-            string filterQuery = BuildOutFilterQuery(query, fields);
+            string query = "*";
+            List<string> fields = new List<string> {};
+            string filterQuery = BuildFilterQuery(query, fields);
 
 
             // build out JSON Object as payload
@@ -51,6 +51,8 @@ namespace DataGridConsole
             {
                 JObject results = client.Post(requestUri, payload);
                 Console.WriteLine(results.ToString());
+                //JArray listOfResults = JArray.FromObject(results["Data"]);
+                //Console.WriteLine($"Total: {listOfResults.Count}");
             }
             catch (Exception e)
             {
@@ -95,8 +97,9 @@ namespace DataGridConsole
         /// </summary>
         /// <param name="query"></param>
         /// <param name="fields"></param>
+        /// <param name="filter"></param>
         /// <returns></returns>
-        private static string BuildOutFilterQuery(string query, IEnumerable<string> fields)
+        private static string BuildFilterQuery(string query, IEnumerable<string> fields, JObject filter = null)
         {
             // JSON structure:
             // { 
@@ -110,11 +113,17 @@ namespace DataGridConsole
             //     }       
             //   }
             // }
+
+            if (filter == null)
+            {
+                filter = new JObject();
+            }
+
             JObject result = new JObject
             {
                 ["filtered"] = new JObject
                 {
-                    ["filter"] = new JObject(),
+                    ["filter"] = filter,
                     ["query"] = new JObject
                     {
                         ["query_string"] = new JObject
