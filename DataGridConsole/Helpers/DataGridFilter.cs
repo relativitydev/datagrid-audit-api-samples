@@ -15,6 +15,11 @@ namespace DataGridConsole.Helpers
         /// </summary>
         protected static string FilterType;
 
+
+        /// <summary>
+        /// Returns the JObject representation of this filter that can be consumed in a REST call
+        /// </summary>
+        /// <returns></returns>
         public abstract JObject GetFilter();
     }
 }

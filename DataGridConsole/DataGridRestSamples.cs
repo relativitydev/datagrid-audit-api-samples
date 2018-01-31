@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataGridConsole.Helpers;
 using Newtonsoft.Json.Linq;
 
 namespace DataGridConsole
@@ -114,37 +115,8 @@ namespace DataGridConsole
             List<string> fields = new List<string> {  };
 
             // filter for last N days
-            JObject filter = new JObject
-            {
-
-                ["range"] = new JObject
-                {
-                    ["TimeStamp"] = new JObject
-                    {
-                        { "gte", "2018-01-14T00:00:00.000Z" }
-                    }
-                }
-
-                //["and"] = new JArray
-                //{
-                //    new JObject
-                //    {
-                //        ["or"] = new JArray
-                //        {
-                //            new JObject
-                //            {
-                //                //["range"] = new JObject
-                //                //{
-                //                //    ["TimeStamp"] = new JObject
-                //                //    {
-                //                //        { "gte", "2018-01-14T00:00:00.000Z" }
-                //                //    }
-                //                //}
-                //            }
-                //        }
-                //    } 
-                //}
-            };
+            TimeSpan timeSpan = new TimeSpan(lastNumDays, 0, 0, 0);
+            JObject filter = new TimestampFilter(Cmp.Gte, DateTime.Now.Subtract(timeSpan)).GetFilter();
 
             string filterQuery = BuildFilterQuery(query, fields, filter);
 

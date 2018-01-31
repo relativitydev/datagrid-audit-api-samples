@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataGridConsole.Helpers
 {
-    public enum BoolOps
+    public enum BoolOp
     {
         And,
         Or
@@ -14,7 +14,14 @@ namespace DataGridConsole.Helpers
 
     public enum Cmp
     {
+        /// <summary>
+        /// Greater than or equal to
+        /// </summary>
         Gte,
+
+        /// <summary>
+        /// Less than or equal to
+        /// </summary>
         Lte
     }
 
