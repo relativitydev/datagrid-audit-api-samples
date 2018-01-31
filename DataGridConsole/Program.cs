@@ -34,7 +34,7 @@ namespace DataGridConsole
                     Console.WriteLine("-----------");
                     PauseExec();
                     Console.WriteLine("Querying for the first 100 audit records...");
-                    RestSamples.PrintAuditRecords(client);
+                    DataGridRestSamples.PrintAuditRecords(client);
                     PauseExec();
                 }
                 else

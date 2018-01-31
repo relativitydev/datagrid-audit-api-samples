@@ -6,9 +6,12 @@ namespace DataGridConsole
     /// <summary>
     /// This class contains static methods for querying DataGrid via the DataGrid REST API.
     /// </summary>
-    public static class RestSamples
+    public static class DataGridRestSamples
     {
-        
+        /// <summary>
+        /// Prints the first 100 audit records at the instance level.
+        /// </summary>
+        /// <param name="client"></param>
         public static void PrintAuditRecords(RelativityHttpClient client)
         {
             // declare query parameters
@@ -65,6 +68,12 @@ namespace DataGridConsole
             
         }
 
+
+        /// <summary>
+        /// Prints out a JSON representation of the specified audit record ID.
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="recordId"></param>
         public static void PrintSingleAuditRecord(RelativityHttpClient client, int recordId)
         {            
             const string requestUri =
