@@ -9,7 +9,7 @@ namespace DataGridConsole
     /// <summary>
     /// This class authorizes and performs requests. Wraps HttpClient to create generic HTTP methods.
     /// </summary>
-    public class DataGridClient
+    public class RelativityHttpClient
     {
         #region Members
 
@@ -46,11 +46,11 @@ namespace DataGridConsole
         /// <summary>
         /// Creates a new instance of the DataGridClient object
         /// </summary>
-        /// <param name="url"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="timeoutInSeconds"></param>
-        public DataGridClient(string url, string username, string password, int timeoutInSeconds = 60)
+        /// <param name="url">The base URL of our Relativity instance (e.g. https://relativity0=-instance.com)</param>
+        /// <param name="username">The email address of our user</param>
+        /// <param name="password">The user's password</param>
+        /// <param name="timeoutInSeconds">Number of seconds before request should time out. 60 seconds by default</param>
+        public RelativityHttpClient(string url, string username, string password, int timeoutInSeconds = 60)
         {
             Url = url;
             Username = username;
