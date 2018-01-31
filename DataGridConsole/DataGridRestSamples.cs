@@ -29,6 +29,10 @@ namespace DataGridConsole
             const bool includeOldNewValues = false;
 
             string query = "*";
+            // Note: if you specify a non-existent field in this list, then
+            // you will receive 0 results.
+            // These don't specify the fields returned in the query, but rather
+            // the fields on which the query is operating on.
             List<string> fields = new List<string> { };
             string filterQuery = BuildFilterQuery(query, fields);
 
@@ -147,7 +151,7 @@ namespace DataGridConsole
                 JObject results = client.Post(requestUri, payload);
                 JArray listOfResults = JArray.FromObject(results["Data"]);
 
-                // use a hash set to store results
+                // use a hash set to store unique users
                 HashSet<string> users = new HashSet<string>();
 
                 foreach (JToken result in listOfResults)
@@ -161,12 +165,7 @@ namespace DataGridConsole
                     Console.WriteLine("--");
                 }
 
-                // print out users
-                foreach (string user in users)
-                {
-                    Console.WriteLine(user);
-                }
-                Console.WriteLine($"Total number of users: {users.Count}");
+                Console.WriteLine($"Total number of unique users: {users.Count}");
             }
             catch (KeyNotFoundException e)
             {
