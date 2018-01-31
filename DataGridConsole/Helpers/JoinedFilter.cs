@@ -12,8 +12,14 @@ namespace DataGridConsole.Helpers
     /// </summary>
     public class JoinedFilter : DataGridFilter
     {
+        /// <summary>
+        /// List of filters we want to combine
+        /// </summary>
         private List<DataGridFilter> _filters = new List<DataGridFilter>();
 
+        /// <summary>
+        /// Boolean operation with which we want to combine the filters
+        /// </summary>
         private BoolOp _op;
 
 
@@ -52,11 +58,27 @@ namespace DataGridConsole.Helpers
         #endregion
 
 
-
-
+        /// <summary>
+        /// Returns the filters joined as a JSON object
+        /// </summary>
+        /// <returns></returns>
         public override JObject GetFilter()
         {
-            throw new NotImplementedException();
+            var result = new JObject();
+            // extract JObjects from the DataGridFilter objects
+            IEnumerable<JObject> filters = _filters.Select(x => x.GetFilter());
+            JArray filtersJArray = JArray.FromObject(filters);
+            switch (_op)
+            {
+                case BoolOp.And:
+                    result[Constants.BoolOps.And] = filtersJArray;
+                    break;
+                case BoolOp.Or:
+                    result[BoolOp.Or] = filtersJArray;
+                    break;
+                // should never hit default case
+            }
+            return result;
         }
     }
 }
