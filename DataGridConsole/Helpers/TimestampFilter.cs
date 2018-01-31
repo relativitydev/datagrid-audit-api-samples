@@ -7,13 +7,15 @@ namespace DataGridConsole.Helpers
     /// <summary>
     /// Builds out filters for timestamps
     /// </summary>
-    public class TimestampFilter : RangeFilter
+    public class TimestampFilter : DataGridFilter
     {
+        private readonly Cmp _cmp;
+
         private DateTime _dt;
 
         public TimestampFilter(Cmp cmp, DateTime dateTime)
         {
-            Cmp = cmp;
+            _cmp = cmp;
             _dt = dateTime;
             FilterType = "TimeStamp";
         }
@@ -55,7 +57,7 @@ namespace DataGridConsole.Helpers
                     [FilterType] = new JObject()
                 }
             };
-            switch (Cmp)
+            switch (_cmp)
             {
                 case Cmp.Gte:
                     result[Constants.CmpType.Range][FilterType][Constants.Cmp.Gte] = 
