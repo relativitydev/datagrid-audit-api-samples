@@ -15,10 +15,10 @@ namespace DataGridConsole
                 if (File.Exists(credsFilePath))
                 {
                     string[] creds = File.ReadAllLines(credsFilePath);
-                    const int NUM_LINES = 3;
-                    if (creds.Length != NUM_LINES)
+                    const int numLines = 3;
+                    if (creds.Length != numLines)
                     {
-                        Console.WriteLine($"Need {NUM_LINES} lines in {credsFilePath} in the format:");
+                        Console.WriteLine($"Need {numLines} lines in {credsFilePath} in the format:");
                         Console.WriteLine("https://hostname.com");
                         Console.WriteLine("username@hostname.com");
                         Console.WriteLine("MyPassword!1234");

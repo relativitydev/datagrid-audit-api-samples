@@ -5,37 +5,36 @@ using Newtonsoft.Json.Linq;
 
 namespace DataGridConsole.Filters
 {
-    public class ActionFilter : DataGridFilter
+    public class ActionFilter : IDataGridFilter
     {
+        /// <summary>
+        /// Specifies the type as "Action". Needed as a JSON parameter.
+        /// </summary>
+        public string FilterType => "Action";
+
         private List<int> _actionIds;
 
         private List<string> _actionNames;
 
-
         #region Constructors
 
         public ActionFilter(IEnumerable<int> actionIds)
-        {
-            SetType();
+        {;
             _actionIds = actionIds.ToList();
         }
 
         public ActionFilter(IEnumerable<string> actionNames)
         {
-            SetType();
             _actionNames = actionNames.ToList();
         }
 
         #endregion
 
-        public override JObject GetFilter()
+        public JObject GetFilter()
         {
             throw new NotImplementedException();
         }
 
-        private void SetType()
-        {
-            FilterType = "Action";
-        }
+
     }
 }

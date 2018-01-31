@@ -7,17 +7,18 @@ namespace DataGridConsole.Filters
     /// <summary>
     /// Builds out filters for timestamps
     /// </summary>
-    public class TimestampFilter : DataGridFilter
+    public class TimestampFilter : IDataGridFilter
     {
         private readonly Cmp _cmp;
 
         private DateTime _dt;
 
+        public string FilterType => "TimeStamp";
+
         public TimestampFilter(Cmp cmp, DateTime dateTime)
         {
             _cmp = cmp;
             _dt = dateTime;
-            FilterType = "TimeStamp";
         }
 
 
@@ -25,7 +26,7 @@ namespace DataGridConsole.Filters
         /// Returns the JObject representation of this Timestamp filter.
         /// </summary>
         /// <returns></returns>
-        public override JObject GetFilter()
+        public JObject GetFilter()
         {
             // Model for JSON query (the "and" and "or" arrays can
             // be safely ommitted):

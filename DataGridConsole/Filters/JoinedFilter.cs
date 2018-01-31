@@ -7,18 +7,22 @@ namespace DataGridConsole.Filters
     /// <summary>
     /// A class for combining filters with ANDs and ORs
     /// </summary>
-    public class JoinedFilter : DataGridFilter
+    public class JoinedFilter : IDataGridFilter
     {
+        /// <summary>
+        /// Returns the type of filter. Actually not needed here.
+        /// </summary>
+        public string FilterType => "JoinedFilter";
+
         /// <summary>
         /// List of filters we want to combine
         /// </summary>
-        private List<DataGridFilter> _filters = new List<DataGridFilter>();
+        private List<IDataGridFilter> _filters = new List<IDataGridFilter>();
 
         /// <summary>
         /// Boolean operation with which we want to combine the filters
         /// </summary>
         private BoolOp _op;
-
 
         #region Constructors
 
@@ -28,7 +32,7 @@ namespace DataGridConsole.Filters
         /// <param name="filter1"></param>
         /// <param name="filter2"></param>
         /// <param name="op"></param>
-        public JoinedFilter(DataGridFilter filter1, DataGridFilter filter2, BoolOp op)
+        public JoinedFilter(IDataGridFilter filter1, IDataGridFilter filter2, BoolOp op)
         {
             _filters.Add(filter1);
             _filters.Add(filter2);
@@ -41,7 +45,7 @@ namespace DataGridConsole.Filters
         /// </summary>
         /// <param name="filters"></param>
         /// <param name="op"></param>
-        public JoinedFilter(IEnumerable<DataGridFilter> filters, BoolOp op)
+        public JoinedFilter(IEnumerable<IDataGridFilter> filters, BoolOp op)
         {
             _filters = filters.ToList();
             _op = op;
@@ -51,11 +55,13 @@ namespace DataGridConsole.Filters
         #endregion
 
 
+        
+
         /// <summary>
         /// Returns the filters joined as a JSON object
         /// </summary>
         /// <returns></returns>
-        public override JObject GetFilter()
+        public JObject GetFilter()
         {
             var result = new JObject();
             // extract JObjects from the DataGridFilter objects
