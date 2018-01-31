@@ -30,14 +30,16 @@ namespace DataGridConsole
                     string password = creds[2];
                     // instantiate DataGridClient and perform actions
                     RelativityHttpClient client = new RelativityHttpClient(url, username, password);
-                    Console.WriteLine("Successfully instantiated DataGridClient.");
+                    Console.WriteLine("Successfully instantiated RelativityHttpClient.");
                     Console.WriteLine("-----------");
                     PauseExec();
                     Console.WriteLine("Querying for the first 100 audit records...");
                     DataGridRestSamples.PrintAuditRecords(client);
                     PauseExec();
-                    Console.WriteLine("Querying for users who logged in within the last 7 days...");
-                    DataGridRestSamples.PrintUsersLoggedInRecently(client, 7);
+                    Console.WriteLine("-----------");
+                    const int NUM_DAYS = 30;
+                    Console.WriteLine($"Querying for users who logged in within the last {NUM_DAYS} days...");
+                    DataGridRestSamples.PrintUsersLoggedInRecently(client, NUM_DAYS);
                     PauseExec();
                 }
                 else

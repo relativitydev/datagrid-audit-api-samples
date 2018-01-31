@@ -117,7 +117,11 @@ namespace DataGridConsole
 
             // filter for last N days
             TimeSpan timeSpan = new TimeSpan(lastNumDays, 0, 0, 0);
-            JObject filter = new TimestampFilter(Cmp.Gte, DateTime.Now.Subtract(timeSpan)).GetFilter();
+            TimestampFilter timeFilter = new TimestampFilter(Cmp.Gte, DateTime.Now.Subtract(timeSpan));
+            ActionFilter actionFilter = new ActionFilter("Login");
+
+
+            JObject filter = new JoinedFilter(timeFilter, actionFilter, BoolOp.And).GetFilter();
 
             string filterQuery = BuildFilterQuery(query, fields, filter);
 
@@ -147,14 +151,9 @@ namespace DataGridConsole
 
                 foreach (JToken result in listOfResults)
                 {
-                    JObject obj = (JObject)result;                    
+                    JObject obj = (JObject) result;
                     string userName = (string) obj["UserName"];
-                    string action = (string) obj["ActionName"];
-                    if (!String.IsNullOrEmpty(userName) && action.Equals("Login"))
-                    {
-                        // not all actions are associated with users
-                        users.Add(userName);
-                    }                   
+                    users.Add(userName);
                 }
 
                 // print out users
@@ -163,6 +162,11 @@ namespace DataGridConsole
                     Console.WriteLine(user);
                 }
                 Console.WriteLine($"Total number of users: {users.Count}");
+            }
+            catch (KeyNotFoundException e)
+            {
+                Console.WriteLine("One of the action names is invalid.");
+                Console.WriteLine(e);
             }
             catch (Exception e)
             {

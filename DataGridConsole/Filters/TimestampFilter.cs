@@ -51,6 +51,7 @@ namespace DataGridConsole.Filters
             };
             switch (_cmp)
             {
+                // insert the datetime into the appropriate place
                 case Cmp.Gte:
                     result[Constants.CmpType.Range][FilterType][Constants.Cmp.Gte] = 
                         _dt.ToString(dateFormat, CultureInfo.InvariantCulture);

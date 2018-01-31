@@ -4,7 +4,7 @@ namespace DataGridConsole.Filters
 {
 
     /// <summary>
-    /// Base abstract class for DataGrid filteres. Can nest filters inside if it is composite.
+    /// Interface for DataGrid filters
     /// </summary>
     public interface IDataGridFilter
     {
