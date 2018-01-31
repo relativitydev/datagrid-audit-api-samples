@@ -29,7 +29,7 @@ namespace DataGridConsole
                     string username = creds[1];
                     string password = creds[2];
                     // instantiate DataGridClient and perform actions
-                    DataGridClient client = new DataGridClient(url, username, password);
+                    RelativityHttpClient client = new RelativityHttpClient(url, username, password);
                     Console.WriteLine("Successfully instantiated DataGridClient.");
                     Console.WriteLine("-----------");
                     PauseExec();

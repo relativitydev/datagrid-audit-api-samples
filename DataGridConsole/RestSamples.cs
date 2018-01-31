@@ -9,7 +9,7 @@ namespace DataGridConsole
     public static class RestSamples
     {
         
-        public static void PrintAuditRecords(DataGridClient client)
+        public static void PrintAuditRecords(RelativityHttpClient client)
         {
             // declare query parameters
             const int workspaceId = -1;
@@ -65,7 +65,7 @@ namespace DataGridConsole
             
         }
 
-        public static void PrintSingleAuditRecord(DataGridClient client, int recordId)
+        public static void PrintSingleAuditRecord(RelativityHttpClient client, int recordId)
         {            
             const string requestUri =
                 "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemAsync";
