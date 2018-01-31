@@ -118,12 +118,13 @@ namespace DataGridConsole
             // filter for last N days
             TimeSpan timeSpan = new TimeSpan(lastNumDays, 0, 0, 0);
             TimestampFilter timeFilter = new TimestampFilter(Cmp.Gte, DateTime.Now.Subtract(timeSpan));
+
+            // filter for Logins only
             ActionFilter actionFilter = new ActionFilter("Login");
 
-
-            JObject filter = new JoinedFilter(timeFilter, actionFilter, BoolOp.And).GetFilter();
-
-            string filterQuery = BuildFilterQuery(query, fields, filter);
+            // now combine the two filters
+            JObject combinedFilter = new JoinedFilter(timeFilter, actionFilter, BoolOp.And).GetFilter();
+            string filterQuery = BuildFilterQuery(query, fields, combinedFilter);
 
             // build out JSON Object as payload
             JObject payload = new JObject
@@ -172,41 +173,6 @@ namespace DataGridConsole
             {
                 Console.WriteLine(e);
             }
-        }
-
-
-
-        public static void QueryWithMultipleFilters(RelativityHttpClient client)
-        {
-            // declare query parameters
-            const int workspaceId = -1;
-            const string requestUri =
-                "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemsAsync";
-            const int itemsPerPage = 50;
-            const int pageNumber = 1;
-            const string sortBy = "TimeStamp";
-            const string sortOrder = "desc";
-            const bool includeDetails = false;
-            const bool includeOldNewValues = false;
-
-            // create filter 1
-            
-
-            // build out JSON Object as payload
-            JObject payload = new JObject
-            {
-                ["workspaceId"] = workspaceId,
-                ["request"] = new JObject
-                {
-                    {"itemsPerPage", itemsPerPage},
-                    {"pageNumber", pageNumber},
-                    {"sortBy", sortBy},
-                    {"sortOrder", sortOrder},
-                    {"includeDetails", includeDetails},
-                    {"includeOldNewValues", includeOldNewValues},
-                    //{"filterQuery", filterQuery}
-                }
-            };
         }
 
         #endregion
