@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataGridConsole.Helpers;
+using DataGridConsole.Filters;
 using Newtonsoft.Json.Linq;
 
 namespace DataGridConsole

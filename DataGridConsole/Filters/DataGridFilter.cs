@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
-namespace DataGridConsole.Helpers
+namespace DataGridConsole.Filters
 {
 
     /// <summary>
@@ -11,9 +9,10 @@ namespace DataGridConsole.Helpers
     public abstract class DataGridFilter
     {
         /// <summary>
-        /// The type of filter we are using i.e. the field we are filtering on
+        /// The type of filter we are using i.e. the field we are filtering on.
+        /// This is needed for one of the JSON parameters.
         /// </summary>
-        protected static string FilterType;
+        protected string FilterType;
 
 
         /// <summary>

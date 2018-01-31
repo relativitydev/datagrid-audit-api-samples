@@ -2,7 +2,7 @@
 using System.Globalization;
 using Newtonsoft.Json.Linq;
 
-namespace DataGridConsole.Helpers
+namespace DataGridConsole.Filters
 {
     /// <summary>
     /// Builds out filters for timestamps

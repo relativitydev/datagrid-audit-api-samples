@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-namespace DataGridConsole.Helpers
+namespace DataGridConsole.Filters
 {
     /// <summary>
     /// A class for combining filters with ANDs and ORs

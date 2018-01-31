@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DataGridConsole.Helpers
+﻿namespace DataGridConsole.Filters
 {
     /// <summary>
     /// Contains static classes to add typing around strings

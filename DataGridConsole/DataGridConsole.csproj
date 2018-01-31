@@ -46,12 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\JoinedFilter.cs" />
-    <Compile Include="Helpers\Constants.cs" />
-    <Compile Include="Helpers\DataGridFilter.cs" />
-    <Compile Include="Helpers\Enums.cs" />
-    <Compile Include="Helpers\RangeFilter.cs" />
-    <Compile Include="Helpers\TimestampFilter.cs" />
+    <Compile Include="Filters\ActionFilter.cs" />
+    <Compile Include="Filters\JoinedFilter.cs" />
+    <Compile Include="Filters\Constants.cs" />
+    <Compile Include="Filters\DataGridFilter.cs" />
+    <Compile Include="Filters\Enums.cs" />
+    <Compile Include="Filters\TimestampFilter.cs" />
     <Compile Include="RelativityHttpClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
