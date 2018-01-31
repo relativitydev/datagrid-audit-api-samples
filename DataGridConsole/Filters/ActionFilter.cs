@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 
 namespace DataGridConsole.Filters
@@ -16,6 +17,13 @@ namespace DataGridConsole.Filters
         public ActionFilter(IEnumerable<int> actionIds)
         {
             SetType();
+            _actionIds = actionIds.ToList();
+        }
+
+        public ActionFilter(IEnumerable<string> actionNames)
+        {
+            SetType();
+            _actionNames = actionNames.ToList();
         }
 
         #endregion

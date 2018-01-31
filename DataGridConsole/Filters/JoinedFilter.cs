@@ -43,11 +43,7 @@ namespace DataGridConsole.Filters
         /// <param name="op"></param>
         public JoinedFilter(IEnumerable<DataGridFilter> filters, BoolOp op)
         {
-            foreach (DataGridFilter filter in filters)
-            {
-                _filters.Add(filter);
-            }
-
+            _filters = filters.ToList();
             _op = op;
         }
 
