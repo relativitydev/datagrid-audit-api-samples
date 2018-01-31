@@ -26,8 +26,8 @@ namespace DataGridConsole
             const bool includeDetails = false;
             const bool includeOldNewValues = false;
 
-            string query = "*";
-            List<string> fields = new List<string> {"Details.*"};
+            string query = " 'ID' == 13557 ";
+            List<string> fields = new List<string> {"ID", "Timestamp"};
             string filterQuery = BuildOutFilterQuery(query, fields);
 
 
@@ -104,8 +104,8 @@ namespace DataGridConsole
             //     "filter": {},
             //     "query": {
             //       "query_string": {
-            //         "query": "\*\",
-            //         "fields": ["Details.*"]
+            //         "query": "<some query>",
+            //         "fields": ["Field1", "Field2"]
             //       }
             //     }       
             //   }

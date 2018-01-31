@@ -137,7 +137,7 @@ namespace DataGridConsole
                 JObject result = JObject.Parse(resultAsStr);
                 return result;
             }
-            throw new HttpException($"Error occured. Status Code: {response.StatusCode}");
+            throw new HttpException($"Error occured. Status Code: {(int)response.StatusCode} ({response.StatusCode})");
         }
 
         /// <summary>
