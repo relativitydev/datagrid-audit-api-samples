@@ -36,6 +36,9 @@ namespace DataGridConsole
                     Console.WriteLine("Querying for the first 100 audit records...");
                     DataGridRestSamples.PrintAuditRecords(client);
                     PauseExec();
+                    Console.WriteLine("Querying for users who logged in within the last 7 days...");
+                    DataGridRestSamples.PrintUsersLoggedInRecently(client, 7);
+                    PauseExec();
                 }
                 else
                 {
