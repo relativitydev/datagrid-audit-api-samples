@@ -19,8 +19,7 @@ namespace DataGridConsole
         {
             // declare query parameters
             const int workspaceId = -1;
-            const string requestUri =
-                "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemsAsync";
+            const string requestUri = Constants.EndpointUris.GetAuditLogItems;
             const int itemsPerPage = 100;
             const int pageNumber = 1;
             const string sortBy = "TimeStamp";
@@ -76,7 +75,7 @@ namespace DataGridConsole
         public static void PrintSingleAuditRecord(RelativityHttpClient client, int recordId)
         {
             const string requestUri =
-                "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemAsync";
+                Constants.EndpointUris.GetAuditLogItem;
             JObject payload = new JObject
             {
                 ["workspaceId"] = -1, // use admin workspace
@@ -108,7 +107,7 @@ namespace DataGridConsole
             // declare query parameters
             const int workspaceId = -1;
             const string requestUri =
-                "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemsAsync";
+                Constants.EndpointUris.GetAuditLogItems;
             const int itemsPerPage = 1000;
             const int pageNumber = 1;
             const string sortBy = "TimeStamp";

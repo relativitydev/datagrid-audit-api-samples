@@ -7,8 +7,8 @@
     {
         public static class BoolOps
         {
-            public static string And = "and";
-            public static string Or = "or";
+            public const string And = "and";
+            public const string Or = "or";
         }
 
         public static class Cmp
@@ -16,12 +16,24 @@
             /// <summary>
             /// Greater than or equal to
             /// </summary>
-            public static string Gte = "gte";
+            public const string Gte = "gte";
 
             /// <summary>
             /// Less than or equal to
             /// </summary>
-            public static string Lte = "lte";
+            public const string Lte = "lte";
+        }
+
+        public static class EndpointUris
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string GetAuditLogItems =
+                "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemsAsync";
+
+            public const string GetAuditLogItem =
+                "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemAsync";
         }
 
         internal static class CmpType
@@ -29,12 +41,12 @@
             /// <summary>
             /// If we are filtering based on a discrete set of values, we specify terms
             /// </summary>
-            internal static string Terms = "terms";
+            internal const string Terms = "terms";
 
             /// <summary>
             /// If we are filtering based on a continuous spectrum of values (such as time), then we specify a range
             /// </summary>
-            internal static string Range = "range";
+            internal const string Range = "range";
         }
     }
 }
