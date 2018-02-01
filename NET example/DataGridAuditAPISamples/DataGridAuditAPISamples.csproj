@@ -63,11 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Completed\ConnectionHelper.cs" />
-    <Compile Include="Completed\FindAllActionsByUserName.cs" />
-    <Compile Include="Completed\FindErrors.cs" />
-    <Compile Include="Completed\FindLastLoginDateAllUsers.cs" />
-    <Compile Include="Completed\Top100RecordsAdminLevel.cs" />
+    <Compile Include="ConnectionHelper.cs" />
+    <Compile Include="Data Grid Audit Operations\FindAllActionsByUserName.cs" />
+    <Compile Include="Data Grid Audit Operations\FindErrors.cs" />
+    <Compile Include="Data Grid Audit Operations\FindInactiveUsers30Days.cs" />
+    <Compile Include="Data Grid Audit Operations\FindLastLoginAllUsers.cs" />
+    <Compile Include="Data Grid Audit Operations\Top100RecordsAdminLevel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
