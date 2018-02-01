@@ -5,7 +5,8 @@ Summary
 -------
 This C# console application demonstrates how to use the DataGrid Audit API to query and filter on records.
 It does two things:
-First, it queries for all 
+First, it queries for the first 100 records, sorted by Timestamp (descending.
+Second, it queries for all user logins within the last thirty days. 
 
 
 How to use
