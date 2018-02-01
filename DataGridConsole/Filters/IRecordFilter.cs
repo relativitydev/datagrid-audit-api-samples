@@ -6,7 +6,7 @@ namespace DataGridConsole.Filters
     /// <summary>
     /// Interface for DataGrid filters
     /// </summary>
-    public interface IDataGridFilter
+    public interface IRecordFilter
     {
         /// <summary>
         /// The type of filter we are using i.e. the field we are filtering on.

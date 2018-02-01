@@ -7,7 +7,7 @@ namespace DataGridConsole.Filters
     /// <summary>
     /// Builds out filters for timestamps
     /// </summary>
-    public class TimestampFilter : IDataGridFilter
+    public class TimestampFilter : IRecordFilter
     {
         private readonly Cmp _cmp;
 

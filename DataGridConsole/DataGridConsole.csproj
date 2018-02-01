@@ -52,7 +52,7 @@
     <Compile Include="Filters\ActionFilter.cs" />
     <Compile Include="Filters\JoinedFilter.cs" />
     <Compile Include="Filters\Constants.cs" />
-    <Compile Include="Filters\IDataGridFilter.cs" />
+    <Compile Include="Filters\IRecordFilter.cs" />
     <Compile Include="Filters\Enums.cs" />
     <Compile Include="Filters\TimestampFilter.cs" />
     <Compile Include="RelativityHttpClient.cs" />

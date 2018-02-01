@@ -7,7 +7,7 @@ namespace DataGridConsole.Filters
     /// <summary>
     /// A class for combining filters with ANDs and ORs
     /// </summary>
-    public class JoinedFilter : IDataGridFilter
+    public class JoinedFilter : IRecordFilter
     {
         /// <summary>
         /// Returns the type of filter. Actually not needed here.
@@ -17,7 +17,7 @@ namespace DataGridConsole.Filters
         /// <summary>
         /// List of filters we want to combine
         /// </summary>
-        private readonly List<IDataGridFilter> _filters = new List<IDataGridFilter>();
+        private readonly List<IRecordFilter> _filters = new List<IRecordFilter>();
 
         /// <summary>
         /// Boolean operation with which we want to combine the filters
@@ -32,7 +32,7 @@ namespace DataGridConsole.Filters
         /// <param name="filter1"></param>
         /// <param name="filter2"></param>
         /// <param name="op"></param>
-        public JoinedFilter(IDataGridFilter filter1, IDataGridFilter filter2, BoolOp op)
+        public JoinedFilter(IRecordFilter filter1, IRecordFilter filter2, BoolOp op)
         {
             _filters.Add(filter1);
             _filters.Add(filter2);
@@ -45,7 +45,7 @@ namespace DataGridConsole.Filters
         /// </summary>
         /// <param name="filters"></param>
         /// <param name="op"></param>
-        public JoinedFilter(IEnumerable<IDataGridFilter> filters, BoolOp op)
+        public JoinedFilter(IEnumerable<IRecordFilter> filters, BoolOp op)
         {
             _filters = filters.ToList();
             _op = op;

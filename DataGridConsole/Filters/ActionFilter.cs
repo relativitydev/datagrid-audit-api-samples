@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace DataGridConsole.Filters
 {
-    public class ActionFilter : IDataGridFilter
+    public class ActionFilter : IRecordFilter
     {
         /// <summary>
         /// Specifies the type as "Action". Needed as a JSON parameter.
@@ -20,7 +20,7 @@ namespace DataGridConsole.Filters
         /// <summary>
         /// Stores the names of the actions we want to filter on
         /// </summary>
-        private List<string> _actionNames;
+        private readonly List<string> _actionNames;
 
         /// <summary>
         /// Indicates if we are filtering on names (strings) rather than IDs

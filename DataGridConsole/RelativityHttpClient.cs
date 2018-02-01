@@ -110,7 +110,7 @@ namespace DataGridConsole
 
 
         /// <summary>
-        /// 
+        /// Wraps HttpClient.DeleteAsync()
         /// </summary>
         /// <param name="requestUri"></param>
         /// <returns>A JSON Object representing the response</returns>
