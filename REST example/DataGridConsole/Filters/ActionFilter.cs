@@ -70,32 +70,9 @@ namespace DataGridConsole.Filters
         #endregion
 
 
-        public JObject GetCondition()
+        public string GetCondition()
         {
-            // initialize a JSON like:
-            // { "terms": { "Action": [] } } 
-            var result = new JObject
-            {
-                [Constants.CmpType.Terms] = new JObject
-                {
-                    [FilterType] = new JArray()
-                }
-            };
-
-            switch (_useNames)
-            {
-                // insert IDs into Action JArray
-                case true:
-                    // need to lookup IDs
-                    IEnumerable<int> actionIds = _actionNames.Select(x => _actionIdLookup[x]);
-                    result[Constants.CmpType.Terms][FilterType] = JArray.FromObject(actionIds);
-                    break;
-                case false:
-                    result[Constants.CmpType.Terms][FilterType] = JArray.FromObject(_actionIds);
-                    break;
-            }
-
-            return result;
+            
         }
 
         #region Private methods

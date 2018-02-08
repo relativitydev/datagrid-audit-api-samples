@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 
 namespace DataGridConsole.Filters
 {
@@ -61,23 +61,41 @@ namespace DataGridConsole.Filters
         /// Returns the filters joined as a JSON object
         /// </summary>
         /// <returns></returns>
-        public JObject GetCondition()
+        public string GetCondition()
         {
-            var result = new JObject();
-            // extract JObjects from the DataGridFilter objects
-            IEnumerable<JObject> filters = _filters.Select(x => x.GetCondition());
-            JArray filtersJArray = JArray.FromObject(filters);
+            string result = String.Empty;
+            // extract conditions from the collection
+            IEnumerable<string> filters = _filters.Select(x => x.GetCondition());
             switch (_op)
             {
                 case BoolOp.And:
-                    result[Constants.BoolOps.And] = filtersJArray;
+                    result = JoinConditions(filters, Constants.BoolOps.And);
                     break;
                 case BoolOp.Or:
-                    result[Constants.BoolOps.Or] = filtersJArray;
+                    result = JoinConditions(filters, Constants.BoolOps.Or);
                     break;
                 // should never hit default case
             }
             return result;
+        }
+
+
+        /// <summary>
+        /// Concatenates the conditions together with "AND" or "OR"
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <param name="boolOp"></param>
+        /// <returns></returns>
+        private string JoinConditions(IEnumerable<string> conditions, string boolOp)
+        {
+            List<string> sb = new List<string>();
+            foreach (string condition in conditions)
+            {
+                sb.Add($"({condition})");
+            }
+
+            string sep = " " + boolOp + " ";
+            return String.Join(sep, sb);
         }
     }
 }

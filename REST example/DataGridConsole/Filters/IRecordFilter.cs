@@ -19,6 +19,6 @@ namespace DataGridConsole.Filters
         /// Returns the JObject representation of this filter that can be consumed in a REST call
         /// </summary>
         /// <returns></returns>
-        JObject GetCondition();
+        string GetCondition();
     }
 }
