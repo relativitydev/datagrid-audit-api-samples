@@ -7,8 +7,8 @@
     {
         public static class BoolOps
         {
-            public const string And = "and";
-            public const string Or = "or";
+            public const string And = "AND";
+            public const string Or = "OR";
         }
 
         public static class Cmp
@@ -16,18 +16,18 @@
             /// <summary>
             /// Greater than or equal to
             /// </summary>
-            public const string Gte = "gte";
+            public const string Gte = ">=";
 
             /// <summary>
             /// Less than or equal to
             /// </summary>
-            public const string Lte = "lte";
+            public const string Lte = "<=";
         }
 
         public static class EndpointUris
         {
             /// <summary>
-            /// 
+            /// Endpont for querying audits. Need to format with workspace artifact ID.
             /// </summary>
             public const string QueryAudits =
                 "/Relativity.Rest/API/Relativity.Objects.Audits/workspaces/{0}/audits/query/";
@@ -38,6 +38,13 @@
                 "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemAsync";
             
         }
+
+        public static class SortOrder
+        {
+            public const string Ascending = "Ascending";
+            public const string Descending = "Descending";
+        }
+
 
         internal static class CmpType
         {

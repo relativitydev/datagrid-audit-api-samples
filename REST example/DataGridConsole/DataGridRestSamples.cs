@@ -13,25 +13,90 @@ namespace DataGridConsole
         #region Examples
         /// <summary>
         /// Prints the first 100 audit records at the instance level.
+        /// Sorts by Timestamp descending.
         /// </summary>
         /// <param name="client"></param>
         public static void PrintAuditRecords(RelativityHttpClient client)
         {
-            // declare query parameters
+            // declare workspace ID
+            // -1 for admin-level audits
             const int workspaceId = -1;
+
             // insert workspaceId into URL
             string requestUri =
                 String.Format(Constants.EndpointUris.QueryAudits, workspaceId);
+
             // items per page
             const int length = 100;
+
             // index of first artifact in result set
-            const int start = 1;
-            string[] sorts = { "TimeStamp" };
-            const string sortOrder = "desc";
+            const int start = 0;
 
+            // add any fields
+            var fields = new List<string>
+            {
+                "Audit ID",
+                "Timestamp",
+                "Object Name",
+                "Action",
+                "Execution Time (ms)",
+                "Object ArtifactID",
+                "User Name",
+                "Field",
+                "Old Value",
+                "New Value"
+            };
 
+            JArray fieldsAsJArray = BuildFieldsArray(fields);
 
+            // create any sorts
+            var sortByTimestamp = new JObject
+            {
+                ["Direction"] = Constants.SortOrder.Descending,
+                ["FieldIdentifier"] = new JObject
+                {
+                    ["Name"] = "Timestamp"
+                }
+            };
 
+            // add more sorts if needed
+            // ...
+            // then add sorts to JArray
+            JArray sorts = new JArray
+            {
+                sortByTimestamp
+            };
+
+            // construct payload
+            JObject payload = new JObject
+            {
+                ["artifactType"] = new JObject
+                {
+                    // can hard-code this to 0, since the URL knows where we are
+                    ["descriptorArtifactTypeID"] = 0
+                },
+                ["query"] = new JObject
+                {
+                    ["fields"] = fieldsAsJArray,
+                    ["condition"] = "",
+                    ["rowCondition"] = "",
+                    ["sorts"] = sorts
+                },
+                ["start"] = start,
+                ["length"] = length
+            };  
+            
+            try
+            {
+                JObject results = client.Post(requestUri, payload);
+                // print out plain JSON
+                Console.WriteLine(results.ToString());
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
 
@@ -149,6 +214,28 @@ namespace DataGridConsole
 
 
         #region Private helper methods
+
+        /// <summary>
+        /// Puts a collection of field names into a field
+        /// </summary>
+        /// <param name="fieldNames"></param>
+        /// <returns></returns>
+        private static JArray BuildFieldsArray(IEnumerable<string> fieldNames)
+        {
+            JArray fields = new JArray();
+            foreach (string field in fieldNames)
+            {
+                fields.Add( new JObject
+                {
+                    ["Name"] = field,
+                    // can leave GUIDs and 
+                    // Artifact IDs as bogus values
+                    ["Guids"] = new JArray(),
+                    ["ArtifactID"] = 0
+                });
+            }
+            return fields;
+        }
 
         /// <summary>
         /// Builds out a JSON object representing the filters/queries converted to string
