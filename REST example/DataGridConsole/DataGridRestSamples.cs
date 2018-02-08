@@ -19,50 +19,18 @@ namespace DataGridConsole
         {
             // declare query parameters
             const int workspaceId = -1;
-            const string requestUri = Constants.EndpointUris.GetAuditLogItems;
-            const int itemsPerPage = 100;
-            const int pageNumber = 1;
-            const string sortBy = "TimeStamp";
+            // insert workspaceId into URL
+            string requestUri =
+                String.Format(Constants.EndpointUris.QueryAudits, workspaceId);
+            // items per page
+            const int length = 100;
+            // index of first artifact in result set
+            const int start = 1;
+            string[] sorts = { "TimeStamp" };
             const string sortOrder = "desc";
-            const bool includeDetails = false;
-            const bool includeOldNewValues = false;
-
-            string query = "*";
-            // Note: if you specify a non-existent field in this list, then
-            // you will receive 0 results.
-            // These don't specify the fields returned in the query, but rather
-            // the fields on which the query is operating on.
-            List<string> fields = new List<string> { };
-            string filterQuery = BuildFilterQuery(query, fields);
 
 
-            // build out JSON Object as payload
-            JObject payload = new JObject
-            {
-                ["workspaceId"] = workspaceId,
-                ["request"] = new JObject
-                {
-                    {"itemsPerPage", itemsPerPage},
-                    {"pageNumber", pageNumber},
-                    {"sortBy", sortBy},
-                    {"sortOrder", sortOrder},
-                    {"includeDetails", includeDetails},
-                    {"includeOldNewValues", includeOldNewValues},
-                    {"filterQuery", filterQuery}
-                }
-            };
 
-            try
-            {
-                JObject results = client.Post(requestUri, payload);
-                Console.WriteLine(results.ToString());
-                //JArray listOfResults = JArray.FromObject(results["Data"]);
-                //Console.WriteLine($"Total: {listOfResults.Count}");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
 
         }
 
@@ -72,13 +40,13 @@ namespace DataGridConsole
         /// </summary>
         /// <param name="client"></param>
         /// <param name="recordId"></param>
-        public static void PrintSingleAuditRecord(RelativityHttpClient client, int recordId)
+        public static void PrintSingleAuditRecord(RelativityHttpClient client, int workspaceId, int recordId)
         {
             const string requestUri =
                 Constants.EndpointUris.GetAuditLogItem;
             JObject payload = new JObject
             {
-                ["workspaceId"] = -1, // use admin workspace
+                ["workspaceId"] = workspaceId, 
                 ["request"] = new JObject
                 {
                     {"Id", recordId}
@@ -106,8 +74,8 @@ namespace DataGridConsole
         {
             // declare query parameters
             const int workspaceId = -1;
-            const string requestUri =
-                Constants.EndpointUris.GetAuditLogItems;
+            string requestUri =
+                String.Format(Constants.EndpointUris.QueryAudits, workspaceId);
             const int itemsPerPage = 1000;
             const int pageNumber = 1;
             const string sortBy = "TimeStamp";
@@ -209,20 +177,25 @@ namespace DataGridConsole
                 filter = new JObject();
             }
 
+            //JObject result = new JObject
+            //{
+            //    ["filtered"] = new JObject
+            //    {
+            //        ["filter"] = filter,
+            //        ["query"] = new JObject
+            //        {
+            //            ["query_string"] = new JObject
+            //            {
+            //                {"query", query},
+            //                {"fields", JArray.FromObject(fields)}
+            //            }
+            //        }
+            //    }
+            //};
+
             JObject result = new JObject
             {
-                ["filtered"] = new JObject
-                {
-                    ["filter"] = filter,
-                    ["query"] = new JObject
-                    {
-                        ["query_string"] = new JObject
-                        {
-                            {"query", query},
-                            {"fields", JArray.FromObject(fields)}
-                        }
-                    }
-                }
+                ["filter"] = filter
             };
 
             return result.ToString();

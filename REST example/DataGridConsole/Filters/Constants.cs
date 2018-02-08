@@ -29,11 +29,14 @@
             /// <summary>
             /// 
             /// </summary>
-            public const string GetAuditLogItems =
-                "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemsAsync";
+            public const string QueryAudits =
+                "/Relativity.Rest/API/Relativity.Objects.Audits/workspaces/{0}/audits/query/";
+
+            public static string QueryWithDetails = QueryAudits + "withdetails";
 
             public const string GetAuditLogItem =
                 "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemAsync";
+            
         }
 
         internal static class CmpType
