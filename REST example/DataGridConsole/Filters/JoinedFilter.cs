@@ -61,11 +61,11 @@ namespace DataGridConsole.Filters
         /// Returns the filters joined as a JSON object
         /// </summary>
         /// <returns></returns>
-        public JObject GetFilter()
+        public JObject GetCondition()
         {
             var result = new JObject();
             // extract JObjects from the DataGridFilter objects
-            IEnumerable<JObject> filters = _filters.Select(x => x.GetFilter());
+            IEnumerable<JObject> filters = _filters.Select(x => x.GetCondition());
             JArray filtersJArray = JArray.FromObject(filters);
             switch (_op)
             {

@@ -159,7 +159,7 @@ namespace DataGridConsole
             ActionFilter actionFilter = new ActionFilter("Login");
 
             // now combine the two filters
-            JObject combinedFilter = new JoinedFilter(timeFilter, actionFilter, BoolOp.And).GetFilter();
+            JObject combinedFilter = new JoinedFilter(timeFilter, actionFilter, BoolOp.And).GetCondition();
             string filterQuery = BuildFilterQuery(query, fields, combinedFilter);
 
             // build out JSON Object as payload

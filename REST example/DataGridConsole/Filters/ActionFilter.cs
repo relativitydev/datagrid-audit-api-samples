@@ -70,7 +70,7 @@ namespace DataGridConsole.Filters
         #endregion
 
 
-        public JObject GetFilter()
+        public JObject GetCondition()
         {
             // initialize a JSON like:
             // { "terms": { "Action": [] } } 

@@ -26,7 +26,7 @@ namespace DataGridConsole.Filters
         /// Returns the JObject representation of this Timestamp filter.
         /// </summary>
         /// <returns></returns>
-        public JObject GetFilter()
+        public JObject GetCondition()
         {
             // Model for JSON query
 
