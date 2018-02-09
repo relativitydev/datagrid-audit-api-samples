@@ -26,11 +26,18 @@ namespace DataGridConsole
             string requestUri =
                 String.Format(Constants.EndpointUris.QueryAudits, workspaceId);
 
+            // instantiate query object
+            AuditQuery query = new AuditQuery();
+
             // items per page
             const int length = 100;
 
             // index of first artifact in result set
             const int start = 0;
+
+            // add these params to the query object
+            query.Length = length;
+            query.Start = start;
 
             // add any fields
             var fields = new List<string>
@@ -46,45 +53,18 @@ namespace DataGridConsole
                 "Old Value",
                 "New Value"
             };
-
-            JArray fieldsAsJArray = BuildFieldsArray(fields);
+            query.Fields = fields;
 
             // create any sorts
-            var sortByTimestamp = new JObject
+            Sort sortTimestampDesc = new Sort
             {
-                ["Direction"] = Constants.SortOrder.Descending,
-                ["FieldIdentifier"] = new JObject
-                {
-                    ["Name"] = "Timestamp"
-                }
+                Direction = SortOrder.Desc,
+                FieldName = "Timestamp"
             };
+            query.Sorts = new List<Sort> {sortTimestampDesc};
 
-            // add more sorts if needed
-            // ...
-            // then add sorts to JArray
-            JArray sorts = new JArray
-            {
-                sortByTimestamp
-            };
-
-            // construct payload
-            JObject payload = new JObject
-            {
-                ["artifactType"] = new JObject
-                {
-                    // can hard-code this to 0, since the URL knows where we are
-                    ["descriptorArtifactTypeID"] = 0
-                },
-                ["query"] = new JObject
-                {
-                    ["fields"] = fieldsAsJArray,
-                    ["condition"] = "",
-                    ["rowCondition"] = "",
-                    ["sorts"] = sorts
-                },
-                ["start"] = start,
-                ["length"] = length
-            };  
+            // get payload
+            JObject payload = query.GetJObject();
             
             try
             {

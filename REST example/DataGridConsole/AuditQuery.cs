@@ -91,6 +91,7 @@ namespace DataGridConsole
 
         #endregion
 
+
         /// <summary>
         /// Returns the JObject representation of this query
         /// that RelativityHttpClient can consume
@@ -105,6 +106,12 @@ namespace DataGridConsole
             // convert fields to JArray
             JArray fields = BuildFieldsArray(Fields);
 
+            string condition = String.Empty;
+            if (Condition != null)
+            {
+                condition = Condition.GetCondition();
+            }
+
             // construct payload
             JObject payload = new JObject
             {
@@ -116,8 +123,8 @@ namespace DataGridConsole
                 ["query"] = new JObject
                 {
                     ["fields"] = fields,
-                    ["condition"] = Condition.GetCondition(),
-                    ["rowCondition"] = "",
+                    ["condition"] = condition,
+                    ["rowCondition"] = "", // have not added this member yet
                     ["sorts"] = sortsArr
                 },
                 ["start"] = Start,

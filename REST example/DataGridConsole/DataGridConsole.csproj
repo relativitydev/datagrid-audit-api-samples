@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditQuery.cs" />
     <Compile Include="Filters\ActionFilter.cs" />
     <Compile Include="Filters\JoinedFilter.cs" />
     <Compile Include="Filters\Constants.cs" />
