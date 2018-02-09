@@ -214,27 +214,7 @@ namespace DataGridConsole
 
         #region Private helper methods
 
-        /// <summary>
-        /// Puts a collection of field names into a field
-        /// </summary>
-        /// <param name="fieldNames"></param>
-        /// <returns></returns>
-        private static JArray BuildFieldsArray(IEnumerable<string> fieldNames)
-        {
-            JArray fields = new JArray();
-            foreach (string field in fieldNames)
-            {
-                fields.Add( new JObject
-                {
-                    ["Name"] = field,
-                    // can leave GUIDs and 
-                    // Artifact IDs as bogus values
-                    ["Guids"] = new JArray(),
-                    ["ArtifactID"] = 0
-                });
-            }
-            return fields;
-        }
+
 
         #endregion
     }
