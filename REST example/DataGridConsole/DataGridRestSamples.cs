@@ -127,11 +127,16 @@ namespace DataGridConsole
             string requestUri =
                 String.Format(Constants.EndpointUris.QueryAudits, workspaceId);
 
+            // instantiate query object
+            AuditQuery queryWithCondition = new AuditQuery();
+
             // items per page
             const int length = 100;
+            queryWithCondition.Length = length;
 
             // index of first artifact in result set
             const int start = 0;
+            queryWithCondition.Start = start;            
 
             // add any fields
             var fields = new List<string>
@@ -141,26 +146,19 @@ namespace DataGridConsole
                 "User Name"
             };
 
-            JArray fieldsAsJArray = BuildFieldsArray(fields);
+            queryWithCondition.Fields = fields;
+            
 
             // create any sorts
-            var sortByTimestamp = new JObject
+            var sortByTimestamp = new Sort
             {
-                ["Direction"] = Constants.SortOrder.Descending,
-                ["FieldIdentifier"] = new JObject
-                {
-                    ["Name"] = "Timestamp"
-                }
+                Direction = SortOrder.Desc,
+                FieldName = "Timestamp"
             };
 
-            // add more sorts if needed
-            // ...
-            // then add sorts to JArray
-            JArray sorts = new JArray
-            {
-                sortByTimestamp
-            };
+            queryWithCondition.Sorts = new List<Sort> {sortByTimestamp};
 
+            // add more sorts if needed...
             
             // filter for last N days
             TimeSpan timeSpan = new TimeSpan(lastNumDays, 0, 0, 0);
@@ -171,26 +169,12 @@ namespace DataGridConsole
             ActionFilter actionFilter = new ActionFilter(loginActionId);
 
             // now combine the two filters
-            string combinedFilter = new JoinedFilter(timeFilter, actionFilter, BoolOp.And).GetCondition();
+            var combinedFilter = new JoinedFilter(timeFilter, actionFilter, BoolOp.And);
+            // and add it to the query
+            queryWithCondition.Condition = combinedFilter;
 
             // construct payload
-            JObject payload = new JObject
-            {
-                ["artifactType"] = new JObject
-                {
-                    // can hard-code this to 0, since the URL knows where we are
-                    ["descriptorArtifactTypeID"] = 0
-                },
-                ["query"] = new JObject
-                {
-                    ["fields"] = fieldsAsJArray,
-                    ["condition"] = combinedFilter,
-                    ["rowCondition"] = "",
-                    ["sorts"] = sorts
-                },
-                ["start"] = start,
-                ["length"] = length
-            };
+            JObject payload = queryWithCondition.GetJObject();
 
             try
             {
