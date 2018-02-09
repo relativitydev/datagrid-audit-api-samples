@@ -34,9 +34,14 @@
         Ltn
     }
 
-    public enum CmpType
+
+    /// <summary>
+    /// Determines sort order
+    /// </summary>
+    public enum SortOrder
     {
-        Terms,
-        Range
+        Asc,
+        Desc
     }
+
 }
