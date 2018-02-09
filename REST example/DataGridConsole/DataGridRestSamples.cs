@@ -104,6 +104,7 @@ namespace DataGridConsole
         /// Prints out a JSON representation of the specified audit record ID.
         /// </summary>
         /// <param name="client"></param>
+        /// <param name="workspaceId"></param>
         /// <param name="recordId"></param>
         public static void PrintSingleAuditRecord(RelativityHttpClient client, int workspaceId, int recordId)
         {
@@ -157,14 +158,7 @@ namespace DataGridConsole
             {
                 "Audit ID",
                 "Timestamp",
-                "Object Name",
-                "Action",
-                "Execution Time (ms)",
-                "Object ArtifactID",
-                "User Name",
-                "Field",
-                "Old Value",
-                "New Value"
+                "User Name"
             };
 
             JArray fieldsAsJArray = BuildFieldsArray(fields);
@@ -218,28 +212,31 @@ namespace DataGridConsole
                 ["length"] = length
             };
 
-            Console.WriteLine(payload.ToString());
             try
             {
                 JObject results = client.Post(requestUri, payload);
                 JArray listOfResults = JArray.FromObject(results["Results"]);
 
-                Console.WriteLine(listOfResults.ToString());
-                //// use a hash set to store unique users
-                //HashSet<string> users = new HashSet<string>();
+                // use a hash set to store unique users
+                HashSet<string> users = new HashSet<string>();
 
-                //foreach (JToken result in listOfResults)
-                //{
-                //    JObject obj = (JObject) result;
-                //    string userName = (string) obj["UserName"];
-                //    // print out basic info
-                //    Console.WriteLine($"User: {userName}");
-                //    Console.WriteLine($"Timestamp: {obj["TimeStamp"]}");
-                //    users.Add(userName);
-                //    Console.WriteLine("--");
-                //}
+                foreach (JToken result in listOfResults)
+                {
+                    JObject obj = (JObject)result;
+                    JObject artifact = (JObject) obj["Artifact"];
+                    // get the name of the user and the timestamp
+                    JArray fieldValPairs = (JArray) artifact["FieldValuePairs"];
+                    // the order of the fields should correspond to
+                    // the order we specified when adding returned fields
+                    string timestampVal = fieldValPairs[1]["Value"].ToObject<string>();
+                    Console.WriteLine($"Timestamp: {timestampVal}");
+                    string username = fieldValPairs[2]["Value"]["Name"].ToObject<string>();
+                    Console.WriteLine($"Username: {username}");
+                    users.Add(username);
+                    Console.WriteLine("--");
+                }
 
-                //Console.WriteLine($"Total number of unique users: {users.Count}");
+                Console.WriteLine($"Total number of unique users: {users.Count}");
             }
 
             catch (Exception e)
