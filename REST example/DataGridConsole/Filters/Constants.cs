@@ -13,7 +13,10 @@
 
         public static class Cmp
         {
-
+            /// <summary>
+            /// Equal to
+            /// </summary>
+            public const string EqTo = "==";
 
             /// <summary>
             /// Greater than or equal to
@@ -24,6 +27,16 @@
             /// Less than or equal to
             /// </summary>
             public const string Lte = "<=";
+
+            /// <summary>
+            /// Strictly greater than
+            /// </summary>
+            public const string Gtn = ">";
+
+            /// <summary>
+            /// Strictly less than
+            /// </summary>
+            public const string Ltn = "<";
         }
 
         public static class EndpointUris
@@ -38,7 +51,9 @@
 
             public const string GetAuditLogItem =
                 "/Relativity.REST/api/kCura.AuditUI2.Services.AuditLog.IAuditLogModule/Audit%20Log%20Manager/GetAuditLogItemAsync";
-            
+
+            public const string QueryChoices =
+                "/Relativity.REST/Workspace/{0}/Choice/QueryResult";
         }
 
         public static class SortOrder

@@ -58,7 +58,7 @@ namespace DataGridConsole.Filters
         
 
         /// <summary>
-        /// Returns the filters joined as a JSON object
+        /// Returns the filters joined with a boolean operator
         /// </summary>
         /// <returns></returns>
         public string GetCondition()

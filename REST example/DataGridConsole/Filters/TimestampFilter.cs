@@ -23,46 +23,49 @@ namespace DataGridConsole.Filters
 
 
         /// <summary>
-        /// Returns the JObject representation of this Timestamp filter.
+        /// Returns the string representation of this Timestamp condition.
+        /// 'Timestamp' <= 2017-11-23T23:59:00.00Z
         /// </summary>
         /// <returns></returns>
         public string GetCondition()
         {
-            // Model for JSON query
-
-            // new JObject
-            // {
-            //      ["range"] = new JObject
-            //      {
-            //            ["TimeStamp"] = new JObject
-            //            {
-            //                 { "gte", "2018-01-14T00:00:00.000Z" }
-            //            }
-            //      }
-            // }
-
             const string dateFormat = "yyyy-MM-ddTHH:mm:ss.fffZ";
-            JObject result = new JObject
-            {
-                [Constants.CmpType.Range] = new JObject
-                {
-                    [FilterType] = new JObject()
-                }
-            };
+            string result = String.Empty;
             switch (_cmp)
             {
-                // insert the datetime into the appropriate place
+                // insert the proper comparison operator
+                case Cmp.EqTo:
+                    result = Concatenate(_dt, Constants.Cmp.EqTo, dateFormat);
+                    break;
+                case Cmp.Gtn:
+                    result = Concatenate(_dt, Constants.Cmp.Gtn, dateFormat);
+                    break;
                 case Cmp.Gte:
-                    result[Constants.CmpType.Range][FilterType][Constants.Cmp.Gte] = 
-                        _dt.ToString(dateFormat, CultureInfo.InvariantCulture);
+                    result = Concatenate(_dt, Constants.Cmp.Gte, dateFormat);
                     break;
                 case Cmp.Lte:
-                    result[Constants.CmpType.Range][FilterType][Constants.Cmp.Lte] = 
-                        _dt.ToString(dateFormat, CultureInfo.InvariantCulture);
+                    result = Concatenate(_dt, Constants.Cmp.Lte, dateFormat);
+                    break;
+                case Cmp.Ltn:
+                    result = Concatenate(_dt, Constants.Cmp.Ltn, dateFormat);
                     break;
                 // should never reach default
             }
             return result;
+        }
+
+
+        /// <summary>
+        /// Formats the condition as a string
+        /// (e.g. 'Timestamp' <= 2017-11-23T23:59:00.00Z) 
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="cmp"></param>
+        /// <param name="dateFormat"></param>
+        /// <returns></returns>
+        private string Concatenate(DateTime dt, string cmp, string dateFormat)
+        {
+            return $"'{FilterType}' {cmp} {dt.ToString(dateFormat, CultureInfo.InvariantCulture)}";
         }
     }
 }

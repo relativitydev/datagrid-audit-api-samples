@@ -20,12 +20,12 @@ namespace DataGridConsole.Filters
         /// <summary>
         /// Stores the names of the actions we want to filter on
         /// </summary>
-        private readonly List<string> _actionNames;
+        //private readonly List<string> _actionNames;
 
         /// <summary>
         /// Indicates if we are filtering on names (strings) rather than IDs
         /// </summary>
-        private readonly bool _useNames = false;
+        //private readonly bool _useNames = false;
 
         /// <summary>
         /// Points to a static dictionary to look up action IDs by name. This assumes
@@ -50,29 +50,33 @@ namespace DataGridConsole.Filters
         }
 
 
-        public ActionFilter(string actionName)
-        {
-            _actionNames = new List<string>
-            {
-                actionName
-            };
-            _useNames = true;
-            PopulateLookup();
-        }
+        //public ActionFilter(string actionName)
+        //{
+        //    _actionNames = new List<string>
+        //    {
+        //        actionName
+        //    };
+        //    _useNames = true;
+        //    PopulateLookup();
+        //}
 
-        public ActionFilter(IEnumerable<string> actionNames)
-        {
-            _actionNames = actionNames.ToList();
-            _useNames = true;
-            PopulateLookup();
-        }
+        //public ActionFilter(IEnumerable<string> actionNames)
+        //{
+        //    _actionNames = actionNames.ToList();
+        //    _useNames = true;
+        //    PopulateLookup();
+        //}
 
         #endregion
 
-
+        /// <summary>
+        /// Returns the condition as such:
+        /// 'Action' IN [12345, 12356]
+        /// </summary>
+        /// <returns></returns>
         public string GetCondition()
         {
-            
+            return $"'{FilterType}' IN {_actionIds.ToString()}";
         }
 
         #region Private methods
