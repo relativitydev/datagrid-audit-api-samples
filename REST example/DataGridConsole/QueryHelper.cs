@@ -25,7 +25,8 @@ namespace DataGridConsole
 
             try
             {
-                JObject response = client.Post(Filters.Constants.EndpointUris.QueryChoices, payload);
+                string requestUri = String.Format(Filters.Constants.EndpointUris.QueryChoices, workspaceId);
+                JObject response = client.Post(requestUri, payload);
                 // see if we get a result
                 int count = response["ResultCount"].ToObject<int>();
                 if (count > 0)
