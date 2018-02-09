@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Newtonsoft.Json.Linq;
 
 namespace DataGridConsole.Filters
@@ -76,10 +77,31 @@ namespace DataGridConsole.Filters
         /// <returns></returns>
         public string GetCondition()
         {
-            return $"'{FilterType}' IN {_actionIds.ToString()}";
+            return $"'{FilterType}' IN CHOICE {ConcatenateIds()}";
         }
 
         #region Private methods
+
+        private string ConcatenateIds()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[");
+            for (int i = 0; i < _actionIds.Count; i++)
+            {
+                int id = _actionIds[i];
+                if (i == _actionIds.Count - 1)
+                {
+                    // if we are the last one, we do not want to add a comma
+                    sb.AppendFormat("{0}", id);
+                }
+                else
+                {
+                    sb.AppendFormat("{0},", id);
+                }               
+            }
+            sb.Append("]");
+            return sb.ToString();
+        }
 
         /// <summary>
         /// Populates the dictionary for looking up action IDs if we are using names.

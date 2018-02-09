@@ -4,6 +4,9 @@ using Newtonsoft.Json.Linq;
 
 namespace DataGridConsole
 {
+    /// <summary>
+    /// Contains methods for querying Artifact ID or GUID information on the fly
+    /// </summary>
     public static class QueryHelper
     {
         /// <summary>

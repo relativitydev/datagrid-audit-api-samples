@@ -13,7 +13,7 @@ namespace DataGridConsole.Filters
 
         private DateTime _dt;
 
-        public string FilterType => "TimeStamp";
+        public string FilterType => "Timestamp";
 
         public TimestampFilter(Cmp cmp, DateTime dateTime)
         {
@@ -29,7 +29,7 @@ namespace DataGridConsole.Filters
         /// <returns></returns>
         public string GetCondition()
         {
-            const string dateFormat = "yyyy-MM-ddTHH:mm:ss.fffZ";
+            const string dateFormat = "yyyy-MM-ddTHH:mm:ss.ffZ";
             string result = String.Empty;
             switch (_cmp)
             {
