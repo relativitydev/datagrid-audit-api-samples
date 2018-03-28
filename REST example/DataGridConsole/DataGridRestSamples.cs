@@ -179,7 +179,8 @@ namespace DataGridConsole
             try
             {
                 JObject results = client.Post(requestUri, payload);
-                JArray listOfResults = JArray.FromObject(results["Results"]);
+
+                JArray listOfResults = JArray.FromObject(results["Objects"]);
 
                 // use a hash set to store unique users
                 HashSet<string> users = new HashSet<string>();
@@ -187,15 +188,21 @@ namespace DataGridConsole
                 foreach (JToken result in listOfResults)
                 {
                     JObject obj = (JObject)result;
-                    JObject artifact = (JObject) obj["Artifact"];
-                    // get the name of the user and the timestamp
-                    JArray fieldValPairs = (JArray) artifact["FieldValuePairs"];
-                    // the order of the fields should correspond to
-                    // the order we specified when adding returned fields
-                    string timestampVal = fieldValPairs[1]["Value"].ToObject<string>();
+
+                    // get the field values (which should be in the order we specified in the request)
+                    JArray fieldValuePairs = (JArray)obj["FieldValues"];
+
+                    // get the Audit ID
+                    int id = fieldValuePairs[0]["Value"].ToObject<int>();
+                    Console.WriteLine($"Audit ID: {id}");
+
+                    // get the timestamp
+                    string timestampVal = fieldValuePairs[1]["Value"].ToObject<string>();
                     Console.WriteLine($"Timestamp: {timestampVal}");
-                    string username = fieldValPairs[2]["Value"]["Name"].ToObject<string>();
-                    Console.WriteLine($"Username: {username}");
+
+                    // get the username
+                    string username = fieldValuePairs[2]["Value"]["Name"].ToObject<string>();
+                    Console.WriteLine($"User Name: {username}");
                     users.Add(username);
                     Console.WriteLine("--");
                 }

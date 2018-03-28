@@ -114,14 +114,14 @@ namespace DataGridConsole
 
             // construct payload
             JObject payload = new JObject
-            {
-                ["artifactType"] = new JObject
+            {             
+                ["request"] = new JObject
                 {
-                    // can hard-code this to 0, since the URL knows where we are
-                    ["descriptorArtifactTypeID"] = 0
-                },
-                ["query"] = new JObject
-                {
+                    ["objectType"] = new JObject
+                    {
+                        // can hard-code this to 0, since the URL knows where we are
+                        ["artifactTypeID"] = 0
+                    },
                     ["fields"] = fields,
                     ["condition"] = condition,
                     ["rowCondition"] = "", // have not added this member yet
