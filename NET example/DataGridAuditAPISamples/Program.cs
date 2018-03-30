@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using kCura.AuditUI2.Services.ExternalAuditLog;
+using Relativity.Services.Objects;
+using Relativity.Services.ServiceProxy;
 
 namespace DataGridAuditAPISamples
 {
@@ -20,7 +23,31 @@ namespace DataGridAuditAPISamples
             //Console.WriteLine("#  4. Find All Actions by Specific User  #");
             //Console.WriteLine("#  5. Find the 100 Most Recent Audits    #");
             //Console.WriteLine("##########################################\r\n");
+            if (args.Length != 1)
+            {
+                Console.WriteLine("Must specify path to credentials file in the following format:");
+                Console.WriteLine("http://instance.com");
+                Console.WriteLine("Username");
+                Console.WriteLine("Password");
+            }
+
+            // read credentials from file
+            var connMgr = new ConnectionHelper(args[0]);
+            Console.WriteLine("Successfully read credentials from file.");
+            
             Pause();
+
+            // if successful, instantiate services
+            ServiceFactory serviceFactory = connMgr.GetServiceFactory();
+            using (var logMgr = serviceFactory.CreateProxy<IExternalAuditLogObjectManager>())
+            using (var objMgr = serviceFactory.CreateProxy<IObjectManager>())
+            {
+                Task.Run(async () =>
+                {
+                    await AuditExamples.QueryAdminAudits(logMgr, objMgr);
+                }).Wait();
+            }
+
             //FindLastLoginAllUsers.findLastLogin();
             //Pause();
             //FindInactiveUsers30Days.findInactives();
