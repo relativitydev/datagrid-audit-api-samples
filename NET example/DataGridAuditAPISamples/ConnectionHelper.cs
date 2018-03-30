@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using kCura.AuditUI2.Services.AuditLog;
+using kCura.Relativity.Client;
 using Newtonsoft.Json.Linq;
 using Relativity.Services.ServiceProxy;
+using UsernamePasswordCredentials = Relativity.Services.ServiceProxy.UsernamePasswordCredentials;
 
 
 namespace DataGridAuditAPISamples
@@ -13,11 +15,11 @@ namespace DataGridAuditAPISamples
         /// <summary>
         /// Credentials read from a file
         /// </summary>
-        private string _baseUrl;
-        private string _user;
-        private string _password;
+        private readonly string _baseUrl;
+        private readonly string _user;
+        private readonly string _password;
 
-        private Constants.Enums.AuthType _authType;
+        private readonly Constants.Enums.AuthType _authType;
 
         /// <summary>
         /// Default working workspace artifact ID
@@ -92,6 +94,11 @@ namespace DataGridAuditAPISamples
         }
 
 
+        /// <summary>
+        /// Returns the RSAPIClient with the given workspace
+        /// </summary>
+        /// <param name="workspaceId"></param>
+        /// <returns></returns>
         public IRSAPIClient GetRsapiClient(int workspaceId = -1)
         {
             switch (_authType)
@@ -102,7 +109,7 @@ namespace DataGridAuditAPISamples
                 case Constants.Enums.AuthType.UsernamePassword:
                     IRSAPIClient proxy = new RSAPIClient(
                         ServicesUri,
-                        new UsernamePasswordCredentials(_user, _password));
+                        new kCura.Relativity.Client.UsernamePasswordCredentials(_user, _password));
                     //proxy.APIOptions.WorkspaceID = DefaultWorkspaceId;
                     proxy.APIOptions.WorkspaceID = workspaceId;
                     proxy.Login();
