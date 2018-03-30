@@ -7,6 +7,8 @@ using kCura.AuditUI2.Services.ExternalAuditLog;
 using Relativity.Services;
 using Relativity.Services.Objects;
 using Relativity.Services.Objects.DataContracts;
+using Relativity.Services.Objects.Models;
+using RelativityObject = Relativity.Services.Objects.DataContracts.RelativityObject;
 using Sort = Relativity.Services.Objects.DataContracts.Sort;
 
 namespace DataGridAuditAPISamples
@@ -37,6 +39,9 @@ namespace DataGridAuditAPISamples
             // create the condition
             var condition = new SingleChoiceCondition("Workspace Name", SingleChoiceConditionEnum.AnyOfThese, choiceSelected);
 
+
+            #region New version - specifying fields and query
+
             // list fields
             var fields = new List<Relativity.Services.Objects.DataContracts.FieldRef>
             {
@@ -58,6 +63,7 @@ namespace DataGridAuditAPISamples
                 }
             };
 
+
             var queryRequest = new Relativity.Services.Objects.DataContracts.QueryRequest
             {
                 Condition = condition.ToQueryString(),
@@ -67,8 +73,38 @@ namespace DataGridAuditAPISamples
                 RowCondition = ""
             };
 
-            Relativity.Services.Objects.DataContracts.QueryResult res
-                = await logMgr.QueryAsync(workspaceId, queryRequest, start, length);
+            #endregion
+
+
+            #region older version (9.6.26.97)
+
+            var fieldsOld = new List<Relativity.Services.Field.FieldRef>
+            {
+                new Relativity.Services.Field.FieldRef
+                {
+                    Name = "Audit ID"
+                },
+                new Relativity.Services.Field.FieldRef
+                {
+                    Name = "Timestamp"
+                }
+            };
+
+            var query = new Relativity.Services.Objects.Models.Query
+            {
+                Fields = fieldsOld
+            };
+            
+
+            var artifactType = new Relativity.Services.ObjectTypeReference.ObjectTypeRef
+            {
+                DescriptorArtifactTypeID = 1000016 // can hard-code this, I think
+            };
+
+            #endregion
+
+            ObjectQueryResultSet res
+                = await logMgr.QueryAsync(workspaceId, artifactType, query, start, length);
 
             // do something with results
 

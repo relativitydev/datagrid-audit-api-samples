@@ -37,14 +37,14 @@
     <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
       <HintPath>..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
     </Reference>
-    <Reference Include="kCura, Version=9.6.85.43, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\kCura.9.6.85.43\lib\net462\kCura.dll</HintPath>
+    <Reference Include="kCura, Version=9.6.26.97, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\kCura.9.6.26.97\lib\net462\kCura.dll</HintPath>
     </Reference>
-    <Reference Include="kCura.AuditUI2.Data.Contracts, Version=12.9.5.21, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\kCura.AuditUI2.Services.12.9.5\lib\net45\kCura.AuditUI2.Data.Contracts.dll</HintPath>
+    <Reference Include="kCura.AuditUI2.Data.Contracts, Version=12.7.1.14, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\kCura.AuditUI2.Services.12.7.1\lib\net45\kCura.AuditUI2.Data.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="kCura.AuditUI2.Services.Interface, Version=12.9.5.21, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\kCura.AuditUI2.Services.12.9.5\lib\net45\kCura.AuditUI2.Services.Interface.dll</HintPath>
+    <Reference Include="kCura.AuditUI2.Services.Interface, Version=12.7.1.14, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\kCura.AuditUI2.Services.12.7.1\lib\net45\kCura.AuditUI2.Services.Interface.dll</HintPath>
     </Reference>
     <Reference Include="kCura.Injection, Version=1.0.8.0, Culture=neutral, PublicKeyToken=318fc9f898ce154d, processorArchitecture=MSIL">
       <HintPath>..\packages\kCura.Injection.9.6.85.43\lib\net462\kCura.Injection.dll</HintPath>
@@ -55,11 +55,11 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.API, Version=9.6.85.43, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Relativity.API.9.6.85.43\lib\net462\Relativity.API.dll</HintPath>
+    <Reference Include="Relativity.API, Version=9.6.26.97, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Relativity.API.9.6.26.97\lib\net462\Relativity.API.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Audit.Elasticsearch, Version=12.9.5.21, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\kCura.AuditUI2.Services.12.9.5\lib\net45\Relativity.Audit.Elasticsearch.dll</HintPath>
+    <Reference Include="Relativity.Audit.Elasticsearch, Version=12.7.1.14, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\kCura.AuditUI2.Services.12.7.1\lib\net45\Relativity.Audit.Elasticsearch.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Authentication.Interfaces, Version=9.6.85.43, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Relativity.Authentication.Interfaces.9.6.85.43\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
@@ -73,14 +73,14 @@
     <Reference Include="Relativity.SecretCatalog, Version=1.0.19.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Relativity.SecretCatalog.1.0.19\lib\Relativity.SecretCatalog.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Services.DataContracts, Version=9.6.85.43, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Relativity.Services.DataContracts.9.6.85.43\lib\net462\Relativity.Services.DataContracts.dll</HintPath>
+    <Reference Include="Relativity.Services.DataContracts, Version=9.6.26.97, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Relativity.Services.DataContracts.9.6.26.97\lib\net462\Relativity.Services.DataContracts.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Services.Interfaces, Version=9.6.85.43, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Relativity.Services.Interfaces.9.6.85.43\lib\net462\Relativity.Services.Interfaces.dll</HintPath>
+    <Reference Include="Relativity.Services.Interfaces, Version=9.6.26.97, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Relativity.Services.Interfaces.9.6.26.97\lib\net462\Relativity.Services.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Services.Interfaces.Private, Version=9.6.85.43, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Relativity.Services.Interfaces.Private.9.6.85.43\lib\net462\Relativity.Services.Interfaces.Private.dll</HintPath>
+    <Reference Include="Relativity.Services.Interfaces.Private, Version=9.6.26.97, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Relativity.Services.Interfaces.Private.9.6.26.97\lib\net462\Relativity.Services.Interfaces.Private.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Services.ServiceProxy">
       <HintPath>C:\Program Files\kCura Corporation\Relativity SDK\Services API\Client\Relativity.Services.ServiceProxy.dll</HintPath>
@@ -113,11 +113,11 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\kCura.9.6.85.43\build\kCura.targets" Condition="Exists('..\packages\kCura.9.6.85.43\build\kCura.targets')" />
+  <Import Project="..\packages\kCura.9.6.26.97\build\kCura.targets" Condition="Exists('..\packages\kCura.9.6.26.97\build\kCura.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\kCura.9.6.85.43\build\kCura.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\kCura.9.6.85.43\build\kCura.targets'))" />
+    <Error Condition="!Exists('..\packages\kCura.9.6.26.97\build\kCura.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\kCura.9.6.26.97\build\kCura.targets'))" />
   </Target>
 </Project>

@@ -64,8 +64,7 @@ namespace DataGridAuditAPISamples
 
         public static void Pause()
         {
-            Console.Write("Press any key to continue . . . \r\n \r\n");
-            Console.Write("");
+            Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
         }
     }
