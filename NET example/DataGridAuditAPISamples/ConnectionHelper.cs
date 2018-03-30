@@ -21,11 +21,6 @@ namespace DataGridAuditAPISamples
 
         private readonly Constants.Enums.AuthType _authType;
 
-        /// <summary>
-        /// Default working workspace artifact ID
-        /// </summary>
-        public static int DefaultWorkspaceId { get; } = 1035745;
-
         public string BaseRelativityUrl
         {
             get
