@@ -92,7 +92,8 @@ namespace DataGridAuditAPISamples
 
             var query = new Relativity.Services.Objects.Models.Query
             {
-                Fields = fieldsOld
+                Fields = fieldsOld,
+                Condition = condition.ToQueryString()
             };
             
 

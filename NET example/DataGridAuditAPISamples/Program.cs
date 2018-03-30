@@ -50,16 +50,6 @@ namespace DataGridAuditAPISamples
             }
             Pause();
 
-
-            //FindLastLoginAllUsers.findLastLogin();
-            //Pause();
-            //FindInactiveUsers30Days.findInactives();
-            //Pause();
-            //FindErrors.findAllErrors();
-            //Pause();
-            //FindAllActionsByUserName.findAllActions(args[0]);
-            //Pause();
-            //Top100RecordsAdminLevel.ReturnTop100Audits();
         }
 
         public static void Pause()
