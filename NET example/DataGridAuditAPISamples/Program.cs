@@ -29,6 +29,7 @@ namespace DataGridAuditAPISamples
                 Console.WriteLine("http://instance.com");
                 Console.WriteLine("Username");
                 Console.WriteLine("Password");
+                return;
             }
 
             // read credentials from file
@@ -47,6 +48,8 @@ namespace DataGridAuditAPISamples
                     await AuditExamples.QueryAdminAudits(logMgr, objMgr);
                 }).Wait();
             }
+            Pause();
+
 
             //FindLastLoginAllUsers.findLastLogin();
             //Pause();

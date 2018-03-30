@@ -63,19 +63,19 @@ namespace DataGridAuditAPISamples
         {
             try
             {
-                string[] _creds = File.ReadAllLines(filePath);
+                string[] creds = File.ReadAllLines(filePath);
 
-                if (_creds.Length == 1)
+                if (creds.Length == 1)
                 {
                     Console.WriteLine("Using IntegratedAuth");
-                    _baseUrl = _creds[0];
+                    _baseUrl = creds[0];
                     _authType = Constants.Enums.AuthType.Integrated;
                 }
-                else if (_creds.Length == 3)
+                else if (creds.Length == 3)
                 {
-                    _baseUrl = _creds[0];
-                    _user = _creds[1];
-                    _password = _creds[2];
+                    _baseUrl = creds[0];
+                    _user = creds[1];
+                    _password = creds[2];
                     Console.WriteLine("Using UsernamePassword");
                     _authType = Constants.Enums.AuthType.UsernamePassword;
                 }
