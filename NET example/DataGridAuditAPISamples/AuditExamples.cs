@@ -8,6 +8,7 @@ using Relativity.Services;
 using Relativity.Services.Objects;
 using Relativity.Services.Objects.DataContracts;
 using Relativity.Services.Objects.Models;
+using FieldValuePair = Relativity.Services.Field.FieldValuePair;
 using RelativityObject = Relativity.Services.Objects.DataContracts.RelativityObject;
 using Sort = Relativity.Services.Objects.DataContracts.Sort;
 
@@ -31,13 +32,16 @@ namespace DataGridAuditAPISamples
             const int length = 100;
 
             // filter for admin actions only
-            string workspaceName = "Admin Case";
+            const string workspaceName = "Admin Case";
 
             int choiceId = await GetChoiceId(objMgr, workspaceId, workspaceName);
             var choiceSelected = new List<int> { choiceId };
 
             // create the condition
-            var condition = new SingleChoiceCondition("Workspace Name", SingleChoiceConditionEnum.AnyOfThese, choiceSelected);
+            var condition = new SingleChoiceCondition(
+                Constants.Names.Fields.WorkspaceName, 
+                SingleChoiceConditionEnum.AnyOfThese, 
+                choiceSelected);
 
 
             #region New version - specifying fields and query
@@ -47,19 +51,19 @@ namespace DataGridAuditAPISamples
             {
                 new Relativity.Services.Objects.DataContracts.FieldRef
                 {
-                    Name = "Audit ID"
+                    Name = Constants.Names.Fields.AuditId
                 },
                 new Relativity.Services.Objects.DataContracts.FieldRef
                 {
-                    Name = "Timestamp"
+                    Name = Constants.Names.Fields.Timestamp
                 },
                 new Relativity.Services.Objects.DataContracts.FieldRef
                 {
-                    Name = "Action"
+                    Name = Constants.Names.Fields.Action
                 },
                 new Relativity.Services.Objects.DataContracts.FieldRef
                 {
-                    Name = "Workspace Name"
+                    Name = Constants.Names.Fields.WorkspaceName
                 }
             };
 
@@ -82,11 +86,11 @@ namespace DataGridAuditAPISamples
             {
                 new Relativity.Services.Field.FieldRef
                 {
-                    Name = "Audit ID"
+                    Name = Constants.Names.Fields.AuditId
                 },
                 new Relativity.Services.Field.FieldRef
                 {
-                    Name = "Timestamp"
+                    Name = Constants.Names.Fields.Timestamp
                 }
             };
 
@@ -99,7 +103,7 @@ namespace DataGridAuditAPISamples
 
             var artifactType = new Relativity.Services.ObjectTypeReference.ObjectTypeRef
             {
-                DescriptorArtifactTypeID = 1000016 // can hard-code this, I think
+                DescriptorArtifactTypeID = Constants.Nums.AuditDescriptorId // can hard-code this, I think
             };
 
             #endregion
@@ -109,7 +113,18 @@ namespace DataGridAuditAPISamples
 
             // do something with results
 
-            Console.WriteLine($"Number of objects returned: {res.TotalCount}");
+            foreach (Result<Relativity.Services.Objects.Models.RelativityObject> record in res.Results)
+            {
+                IEnumerable<FieldValuePair> fieldValuePairs = record.Artifact.FieldValuePairs;
+                foreach (FieldValuePair fieldValuePair in fieldValuePairs)
+                {
+                    Console.WriteLine("Field: {0}", fieldValuePair.Field.Name);
+                    Console.WriteLine("Value: {0}", fieldValuePair.Value);
+                }
+                Console.WriteLine("---");
+            }
+
+            Console.WriteLine($"Total number of objects returned: {res.TotalCount}");
         }
 
 
