@@ -67,7 +67,6 @@ namespace DataGridAuditAPISamples
                 }
             };
 
-
             var queryRequest = new Relativity.Services.Objects.DataContracts.QueryRequest
             {
                 Condition = condition.ToQueryString(),
@@ -80,7 +79,7 @@ namespace DataGridAuditAPISamples
             #endregion
 
 
-            #region older version (9.6.26.97)
+            #region Older (currently deployed) version (9.6.26.97)
 
             var fieldsOld = new List<Relativity.Services.Field.FieldRef>
             {
@@ -100,7 +99,6 @@ namespace DataGridAuditAPISamples
                 Condition = condition.ToQueryString()
             };
             
-
             var artifactType = new Relativity.Services.ObjectTypeReference.ObjectTypeRef
             {
                 DescriptorArtifactTypeID = Constants.Nums.AuditDescriptorId // can hard-code this, I think
@@ -126,7 +124,6 @@ namespace DataGridAuditAPISamples
 
             Console.WriteLine($"Total number of objects returned: {res.TotalCount}");
         }
-
 
 
         private static async Task<int> GetChoiceId(IObjectManager mgr, int workspaceId, string choiceName)
