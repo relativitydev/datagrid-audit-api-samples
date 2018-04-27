@@ -10,7 +10,10 @@ using UsernamePasswordCredentials = Relativity.Services.ServiceProxy.UsernamePas
 
 namespace DataGridAuditAPISamples
 {
-    class ConnectionHelper
+    /// <summary>
+    /// Class used to help with authenticating services
+    /// </summary>
+    public class ConnectionHelper
     {
         /// <summary>
         /// Credentials read from a file
@@ -45,6 +48,21 @@ namespace DataGridAuditAPISamples
         public Uri ServicesUri => new Uri(BaseRelativityUrl + ".Services");
 
         public Uri RestUri => new Uri(BaseRelativityUrl + ".REST/api");
+
+
+        /// <summary>
+        /// Instantiate with username/password credentials
+        /// </summary>
+        /// <param name="url">Relativity instance base URL (do not append Relativity)</param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        public ConnectionHelper(string url, string username, string password)
+        {
+            _baseUrl = url;
+            _user = username;
+            _password = password;
+            _authType = Constants.Enums.AuthType.UsernamePassword;
+        }
 
 
         /// <summary>

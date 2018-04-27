@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,26 +15,19 @@ namespace DataGridAuditAPISamples
         public static void Main(string[] args)
         {
 
-            //Console.WriteLine("##########################################");
-            //Console.WriteLine("#       DATAGRID AUDIT API SAMPLES       #");
-            //Console.WriteLine("#           ORDER OF SAMPLES:            #");
-            //Console.WriteLine("#  1. Find Last Login Date of All Users  #");
-            //Console.WriteLine("#  2. Find All Inactive Users (30 days)  #");
-            //Console.WriteLine("#  3. Find All Errors in Audit Logs      #");
-            //Console.WriteLine("#  4. Find All Actions by Specific User  #");
-            //Console.WriteLine("#  5. Find the 100 Most Recent Audits    #");
-            //Console.WriteLine("##########################################\r\n");
-            if (args.Length != 1)
+            // read credentials from app.config
+            var configReader = new AppSettingsReader();
+            string url = configReader.GetValue("RelativityBaseUrl", typeof(string)).ToString();
+            string username = configReader.GetValue("RelativityUserName", typeof(string)).ToString();
+            string password = configReader.GetValue("RelativityPassword", typeof(string)).ToString();
+            string workspaceIdAsStr = configReader.GetValue("WorkspaceId", typeof(string)).ToString();
+            int workspaceId = -1;
+            if (!String.IsNullOrEmpty(workspaceIdAsStr))
             {
-                Console.WriteLine("Must specify path to credentials file in the following format:");
-                Console.WriteLine("http://instance.com");
-                Console.WriteLine("Username");
-                Console.WriteLine("Password");
-                return;
+                workspaceId = Int32.Parse(workspaceIdAsStr);
             }
 
-            // read credentials from file
-            var connMgr = new ConnectionHelper(args[0]);
+            var connMgr = new ConnectionHelper(url, username, password);
             Console.WriteLine("Successfully read credentials from file.");
             
             Pause();
@@ -45,7 +39,7 @@ namespace DataGridAuditAPISamples
             {
                 Task.Run(async () =>
                 {
-                    await AuditExamples.QueryAdminAudits(logMgr, objMgr);
+                    await AuditExamples.QueryAdminAudits(logMgr, objMgr, workspaceId);
                 }).Wait();
             }
             Pause();
