@@ -1,15 +1,13 @@
 How to use
 ----------
-When running the solution, supply one command line argument that specifies the path to your credentials text file, 
-which should be formatted like so:
-(instance URL)
-(email address of user)
-(password)
+Before running the executable, fill out the appSettings section in your app.config file:
 
-e.g.
-https://my-relativity-instance.com
-my_username@my-relativity-instance.com
-MySecretPassword!1234
+  <appSettings>
+    <add key="RelativityBaseUrl" value="https://relativity-instance" />
+    <add key="RelativityUserName" value="" />
+    <add key="RelativityPassword" value="" />
+    <add key="WorkspaceId" value=""/>
+  </appSettings>
 
 Note: it is crucial that your DLL versions match your Relativity instance version.
 
