@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace DataGridConsole
 {
@@ -7,6 +8,10 @@ namespace DataGridConsole
     {
         public static void Main(string[] args)
         {
+            string url = String.Empty;
+            string username = String.Empty;
+            string password = String.Empty;
+            RelativityHttpClient client;
             // get credentials for authentication
             if (args.Length == 1)
             {
@@ -25,38 +30,81 @@ namespace DataGridConsole
                         PauseExec();
                         return;
                     }
-                    string url = creds[0];
-                    string username = creds[1];
-                    string password = creds[2];
-                    // instantiate DataGridClient and perform actions
-                    RelativityHttpClient client = new RelativityHttpClient(url, username, password);
-                    Console.WriteLine("Successfully instantiated RelativityHttpClient.");
-                    Console.WriteLine("-----------");
-                    PauseExec();
-                    Console.WriteLine("Querying for the first 100 audit records...");
-                    DataGridRestSamples.PrintAuditRecords(client);
-                    PauseExec();
-                    Console.WriteLine("-----------");
-                    const int NUM_DAYS = 30;
-                    Console.WriteLine($"Querying for users who logged in within the last {NUM_DAYS} days...");
-                    DataGridRestSamples.PrintUsersLoggedInRecently(client, NUM_DAYS);
-                    PauseExec();
+                    url = creds[0];
+                    username = creds[1];
+                    password = creds[2];
+                    
                 }
                 else
                 {
                     Console.WriteLine($"Specified file {credsFilePath} does not exist.");
                     PauseExec();
-                }
-                
+                }               
             }
             else
             {
-                // TODO: implement reading from user input
-                //Console.WriteLine("Please enter your Relativity URL (e.g. https://my-instance.com");
-                Console.WriteLine("Please specify a path to a credentials file.");
+                ReadUserInput(out url, out username, out password);
                 PauseExec();
-            }          
+            }
+            // instantiate DataGridClient and perform actions
+            client = new RelativityHttpClient(url, username, password);
+            Console.WriteLine("Successfully instantiated RelativityHttpClient.");
+            Console.WriteLine("-----------");
+            PauseExec();
+            RunTests(client);
         }
+
+
+        private static void RunTests(RelativityHttpClient client)
+        {
+            Console.WriteLine("Querying for the first 100 audit records...");
+            DataGridRestSamples.PrintAuditRecords(client);
+            PauseExec();
+            Console.WriteLine("-----------");
+            const int NUM_DAYS = 30;
+            Console.WriteLine($"Querying for users who logged in within the last {NUM_DAYS} days...");
+            DataGridRestSamples.PrintUsersLoggedInRecently(client, NUM_DAYS);
+            PauseExec();
+        }
+
+
+        /// <summary>
+        /// Reads in and validates the user credentials by attempting to log in
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="user"></param>
+        /// <param name="pw"></param>
+        /// <returns></returns>
+        private static void ReadUserInput(out string url, out string user, out string pw)
+        {
+            Console.WriteLine("Please enter your Relativity instance URL (e.g. https://my-instance.com).");
+            url = Console.ReadLine();
+            Console.WriteLine("Please enter your Relativity username (e.g. albert.einstein@relativity.com).");
+            user = Console.ReadLine();
+            Console.WriteLine("Please enter your Relativity password. The cursor will not move.");
+            StringBuilder pwBuilder = new StringBuilder();
+            // hide password
+            while (true)
+            {
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Enter)
+                {
+                    Console.WriteLine();
+                    break;
+                }
+                if (key.Key == ConsoleKey.Backspace && pwBuilder.Length > 0)
+                {
+                    // remove last element
+                    pwBuilder.Remove(pwBuilder.Length - 1, 1);
+                }
+                else
+                {
+                    pwBuilder.Append(key.KeyChar);
+                }
+            }
+            pw = pwBuilder.ToString();
+        }
+
 
 
         /// <summary>

@@ -44,7 +44,7 @@ namespace DataGridConsole
 
 
         /// <summary>
-        /// Creates a new instance of the DataGridClient object
+        /// Creates a new instance of the Relativity HttpClient object
         /// </summary>
         /// <param name="url">The base URL of our Relativity instance (e.g. https://relativity0=-instance.com)</param>
         /// <param name="username">The email address of our user</param>
