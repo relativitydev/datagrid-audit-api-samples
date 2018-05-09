@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Text;
 
@@ -43,14 +44,29 @@ namespace DataGridConsole
             }
             else
             {
-                ReadUserInput(out url, out username, out password);
-                PauseExec();
+                // try to read from app.config file
+                // read credentials from app.config
+                var configReader = new AppSettingsReader();
+                url = configReader.GetValue("RelativityBaseUrl", typeof(string)).ToString();
+                username = configReader.GetValue("RelativityUserName", typeof(string)).ToString();
+                password = configReader.GetValue("RelativityPassword", typeof(string)).ToString();
+
             }
+
+            // if anything is empty, have the end-user input the credentials
+            if (String.IsNullOrEmpty(url) ||
+                String.IsNullOrEmpty(username) ||
+                String.IsNullOrEmpty(password))
+            {
+                ReadUserInput(out url, out username, out password);
+            }
+            PauseExec();
             // instantiate DataGridClient and perform actions
             client = new RelativityHttpClient(url, username, password);
             Console.WriteLine("Successfully instantiated RelativityHttpClient.");
             Console.WriteLine("-----------");
-            PauseExec();
+
+            // finally, run the samples
             RunTests(client);
         }
 
